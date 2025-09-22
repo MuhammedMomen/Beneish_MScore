@@ -57,27 +57,32 @@ class BeneishController:
             ft.IconButton(
                 Icons.TRANSLATE,
                 tooltip=self.translation_manager.get_text("language"),
-                on_click=self.toggle_language
+                on_click=self.toggle_language,
+                icon_color=ft.colors.WHITE
             ),
             ft.IconButton(
                 Icons.HELP,
                 tooltip=self.translation_manager.get_text("help"),
-                on_click=self.show_help_dialog
+                on_click=self.show_help_dialog,
+                icon_color=ft.colors.WHITE
             ),
             ft.IconButton(
                 Icons.QUIZ,
                 tooltip=self.translation_manager.get_text("faq"),
-                on_click=self.show_faq_dialog
+                on_click=self.show_faq_dialog,
+                icon_color=ft.colors.WHITE
             ),
             ft.IconButton(
                 Icons.INFO,
                 tooltip=self.translation_manager.get_text("about"),
-                on_click=self.show_about_dialog
+                on_click=self.show_about_dialog,
+                icon_color=ft.colors.WHITE
             ),
             ft.IconButton(
                 Icons.SETTINGS,
                 tooltip=self.translation_manager.get_text("settings"),
-                on_click=self.show_settings
+                on_click=self.show_settings,
+                icon_color=ft.colors.WHITE
             )
         ]
         
@@ -87,7 +92,8 @@ class BeneishController:
             leading = ft.IconButton(
                 Icons.ARROW_BACK,
                 tooltip=self.translation_manager.get_text("back"),
-                on_click=self.go_to_main_view
+                on_click=self.go_to_main_view,
+                icon_color=ft.colors.WHITE
             )
         
         self.page.appbar = ft.AppBar(
@@ -179,21 +185,19 @@ class BeneishController:
             actions=[
                 ft.TextButton(
                     "Close",
-                    on_click=lambda _: self.close_dialog()
+                    on_click=lambda e: self.page.close(dialog)
                 )
             ],
             actions_alignment=ft.MainAxisAlignment.END,
         )
         
-        self.page.dialog = dialog
-        dialog.open = True
-        self.page.update()
+        self.page.open(dialog)
     
     def close_dialog(self):
-        """Close the current dialog"""
-        if self.page.dialog:
-            self.page.dialog.open = False
-            self.page.update()
+        """Close the current dialog - deprecated, use page.close() instead"""
+        # This method is kept for backward compatibility but should not be used
+        # Use page.close(dialog) instead
+        pass
     
     def toggle_language(self, e):
         """Toggle between English and Arabic"""
@@ -212,28 +216,25 @@ class BeneishController:
     
     def show_help_dialog(self, e):
         """Show help dialog"""
+        help_content = ft.Column([
+            ft.Text(
+                self.translation_manager.get_text("help_content"),
+                size=14
+            )
+        ])
+        
         dialog = ft.AlertDialog(
-            modal=True,
             title=ft.Text(self.translation_manager.get_text("help_title")),
-            content=ft.Container(
-                content=ft.Text(
-                    self.translation_manager.get_text("help_content"),
-                    size=14
-                ),
-                width=500,
-                height=300
-            ),
+            content=help_content,
             actions=[
                 ft.TextButton(
                     "Close",
-                    on_click=lambda _: self.close_dialog()
+                    on_click=lambda e: self.page.close(dialog)
                 )
             ]
         )
         
-        self.page.dialog = dialog
-        dialog.open = True
-        self.page.update()
+        self.page.open(dialog)
     
     def show_faq_dialog(self, e):
         """Show FAQ dialog"""
@@ -270,7 +271,6 @@ class BeneishController:
         ], scroll=ft.ScrollMode.AUTO)
         
         dialog = ft.AlertDialog(
-            modal=True,
             title=ft.Text(self.translation_manager.get_text("faq_title")),
             content=ft.Container(
                 content=faq_content,
@@ -280,14 +280,12 @@ class BeneishController:
             actions=[
                 ft.TextButton(
                     "Close",
-                    on_click=lambda _: self.close_dialog()
+                    on_click=lambda e: self.page.close(dialog)
                 )
             ]
         )
         
-        self.page.dialog = dialog
-        dialog.open = True
-        self.page.update()
+        self.page.open(dialog)
     
     def show_about_dialog(self, e):
         """Show about dialog with developer contact"""
@@ -325,7 +323,6 @@ class BeneishController:
         ])
         
         dialog = ft.AlertDialog(
-            modal=True,
             title=ft.Text(self.translation_manager.get_text("about_title")),
             content=ft.Container(
                 content=about_content,
@@ -335,14 +332,12 @@ class BeneishController:
             actions=[
                 ft.TextButton(
                     "Close",
-                    on_click=lambda _: self.close_dialog()
+                    on_click=lambda e: self.page.close(dialog)
                 )
             ]
         )
         
-        self.page.dialog = dialog
-        dialog.open = True
-        self.page.update()
+        self.page.open(dialog)
     
     def on_upload_clicked(self):
         """Handle upload button click"""
@@ -472,11 +467,14 @@ class BeneishController:
         except Exception as e:
             self.show_snack_bar(f"Copy failed: {str(e)}")
     
-    def show_snack_bar(self, message: str):
-        """Show a snack bar message"""
-        self.page.snack_bar = ft.SnackBar(content=ft.Text(message))
-        self.page.snack_bar.open = True
-        self.page.update()
+    def show_snack_bar(self, message: str, color: str = None):
+        """Show snack bar message"""
+        snack_bar = ft.SnackBar(
+            content=ft.Text(message),
+            bgcolor=color
+        )
+        
+        self.page.open(snack_bar)
     
     def on_rerun_analysis(self):
         """Handle rerun analysis request"""

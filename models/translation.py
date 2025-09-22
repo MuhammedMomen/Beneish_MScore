@@ -7,7 +7,7 @@ class TranslationManager:
         self.translations = {
             "en": {
                 # App Title and Navigation
-                "app_title": "Beneish M-Score Calculator",
+                "app_title": "Beneish M-Score Financial Analysis Tool",
                 "back": "Back",
                 "help": "Help",
                 "faq": "FAQ", 

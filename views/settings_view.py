@@ -49,18 +49,25 @@ class SettingsView:
     # --- Event Handlers ---
 
     def on_provider_changed(self, e: ft.ControlEvent):
-        """Handle provider selection change."""
+        """Handle provider selection change"""
         provider = e.control.value
-        self.status_text.value = "" # Clear previous status messages
         
-        if provider:
+        # Update model options only after dropdown is created
+        if self.model_dropdown is not None:
             self.update_model_options(provider)
-            self.model_dropdown.disabled = False
-        else:
-            self.model_dropdown.options = []
-            self.model_dropdown.disabled = True
+            # Get the first available model for this provider
+            if provider in self.config.llm_providers:
+                models = self.config.llm_providers[provider].models
+                if models:
+                    # Configure the LLM service with provider and default model
+                    api_key = self.config.get_api_key(provider)
+                    if api_key:
+                        self.llm_service.configure(provider, models[0], api_key)
         
+        # Update API key status
         self._update_api_key_status(provider)
+        
+        # Update the page
         self.page.update()
 
     def on_api_key_changed(self, e: ft.ControlEvent):
@@ -111,6 +118,9 @@ class SettingsView:
     
     def update_model_options(self, provider: str):
         """Update model options based on the selected provider."""
+        if self.model_dropdown is None:
+            return  # Dropdown not initialized yet
+            
         if provider in self.config.llm_providers:
             models = self.config.llm_providers[provider].models
             self.model_dropdown.options = [ft.dropdown.Option(key=model, text=model) for model in models]
@@ -172,8 +182,15 @@ class SettingsView:
         
         # Initialize model options if a provider is already selected
         if self.llm_service.current_provider:
-            self.update_model_options(self.llm_service.current_provider)
-            self.model_dropdown.value = self.llm_service.current_model
+            # Set options directly without calling update() since dropdown isn't on page yet
+            provider = self.llm_service.current_provider
+            if provider in self.config.llm_providers:
+                models = self.config.llm_providers[provider].models
+                self.model_dropdown.options = [ft.dropdown.Option(key=model, text=model) for model in models]
+                if models and self.llm_service.current_model:
+                    self.model_dropdown.value = self.llm_service.current_model
+                elif models:
+                    self.model_dropdown.value = models[0]
         
         return ft.Container(
             content=ft.Column([
