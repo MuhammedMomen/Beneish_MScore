@@ -147,17 +147,17 @@ class MainView:
         return ft.Container(
             content=ft.Column([
                 ft.Text(
-                    "📊 How to use this tool:",
+                    f'📊 {self.translation_manager.get_text("how_to_use_this_tool")}:',
                     size=18,
                     weight=ft.FontWeight.BOLD,
                     color=self.config.colors.primary
                 ),
                 ft.Container(height=10),
                 ft.Column([
-                    self.create_instruction_item("1️⃣", "Upload financial statements (2 consecutive years)"),
-                    self.create_instruction_item("2️⃣", "AI will extract and analyze financial data"),
-                    self.create_instruction_item("3️⃣", "View Beneish M-Score results and interpretation"),
-                    self.create_instruction_item("⚠️", "This is a red flag tool for earnings manipulation detection")
+                    self.create_instruction_item("1️⃣", self.translation_manager.get_text("upload_instructions")),
+                    self.create_instruction_item("2️⃣", self.translation_manager.get_text("ai_extract_analyze")),
+            self.create_instruction_item("3️⃣", self.translation_manager.get_text("view_results")),
+            self.create_instruction_item("⚠️", self.translation_manager.get_text("red_flag_tool"))
                 ])
             ]),
             margin=ft.margin.only(top=40),

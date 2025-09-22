@@ -112,7 +112,38 @@ This tool is for educational and analysis purposes only.""",
                 "about_title": "About the Developer",
                 "about_content": "This application was developed as a professional financial analysis tool.",
                 "contact_email": "Contact Email",
-                "business_card": "Business Contact"
+                "business_card": "Business Contact",
+                
+                # Hardcoded UI strings
+                "ai_extract_analyze": "AI will extract and analyze financial data",
+                "view_results": "View Beneish M-Score results and interpretation",
+                "red_flag_tool": "This is a red flag tool for earnings manipulation detection",
+                "upload_instructions": "Upload financial statements (2 consecutive years)",
+                "how_to_use_this_tool": "How to use this tool",
+                "api_key_found_env": "API Key found in environment",
+                "using_api_env": "Using API key from environment",
+                "ai_provider_configuration": "AI Provider Configuration",
+                "api_key": "API Key",
+                "test_save_configuration": "Test & Save Configuration",
+                "current_status": "Current Status",
+                "provider": "Provider",
+                "model": "Model",
+                "status": "Status",
+                "not_set": "Not Set",
+                "developer_email": "developer@example.com",
+                "company_name": "Financial Analysis Solutions",
+                "website": "www.example.com",
+                "api_key_required_input": "API Key required",
+                "enter_api_key": "Enter your {provider} API Key",
+                "ai_provider_config": "AI Provider Configuration",
+                "api_key_label": "API Key",
+                "test_save_config": "Test & Save Configuration",
+                "current_status": "Current Status",
+                "copy_data_tooltip": "Copy Data",
+                "expand_data_tooltip": "Click to expand financial data details",
+                "metric_column": "Metric",
+                "formula_calc_details": "Formula & Calculation Details",
+                "close_button": "Close"
             },
             "ar": {
                 # App Title and Navigation (Arabic translations)
@@ -189,45 +220,58 @@ This tool is for educational and analysis purposes only.""",
 
 هذه الأداة للأغراض التعليمية والتحليلية فقط.""",
 
-                # Add more Arabic translations as needed...
+                # FAQ Section
+                "faq_title": "أسئلة شائعة",
+                "faq_who": "من يجب أن يستخدم هذه الأداة؟",
+                "faq_who_answer": """• المحللون الماليون والمستثمرون
+• المدققون والمهنيون المحاسبيون
+• الباحثون الأكاديميون والطلاب
+• فرق الامتثال التنظيمي
+• أي شخص يدرس تحليل البيانات المالية""",
+                "faq_accuracy": "ما مدى دقة نتيجة بينيش إم؟",
+                "faq_accuracy_answer": "أظهر النموذج دقة تقارب 76% في اكتشاف تلاعب الأرباح في الدراسات الأكاديمية. ومع ذلك، يجب استخدامه كأداة واحدة من بين العديد في التحليل المالي.",
+                "faq_data": "ما البيانات المالية المطلوبة؟",
+                "faq_data_answer": "سنتان متتاليتان من: الإيرادات، تكلفة البضائع المباعة، مصاريف البيع والإدارة العامة، الاستهلاك، صافي الدخل، الذمم المدينة، الأصول المتداولة، الممتلكات والمعدات، الأوراق المالية، إجمالي الأصول، الخصوم المتداولة، الديون طويلة الأجل، والتدفق النقدي من العمليات.",
+                
+                # About
+                "about_title": "حول المطور",
+                "about_content": "تم تطوير هذا التطبيق كأداة تحليل مالي مهنية.",
+                "contact_email": "البريد الإلكتروني للتواصل",
+                "business_card": "جهة الاتصال التجارية",
+                
+                # Hardcoded UI strings
+                "ai_extract_analyze": "سيقوم الذكاء الاصطناعي باستخراج وتحليل البيانات المالية",
+                "view_results": "عرض نتائج نتيجة بينيش إم والتفسير",
+                "red_flag_tool": "هذه أداة إنذار مبكر لاكتشاف تلاعب الأرباح",
+                "upload_instructions": "رفع البيانات المالية (سنتان متتاليتان)",
+                "api_key_found_env": "تم العثور على مفتاح API في البيئة",
+                "using_api_env": "استخدام مفتاح API من البيئة",
+                "ai_provider_configuration": "إعداد مزود الذكاء الاصطناعي",
+                "api_key": "مفتاح API",
+                "test_save_configuration": "اختبار وحفظ الإعداد",
+                "current_status": "الحالة الحالية",
+                "provider": "المزود",
+                "model": "النموذج",
+                "status": "الحالة",
+                "not_set": "غير محدد",
+                "developer_email": "developer@example.com",
+                "company_name": "حلول التحليل المالي",
+                "website": "www.example.com",
+                "api_key_required_input": "مفتاح API مطلوب",
+                "enter_api_key": "أدخل مفتاح API الخاص بـ {provider}",
+                "ai_provider_config": "تكوين مزود الذكاء الاصطناعي",
+                "api_key_label": "مفتاح API",
+                "test_save_config": "اختبار وحفظ التكوين",
+                "current_status": "الحالة الحالية",
+                "copy_data_tooltip": "نسخ البيانات",
+                "expand_data_tooltip": "انقر لتوسيع تفاصيل البيانات المالية",
+                "metric_column": "المقياس",
+                "formula_calc_details": "تفاصيل الصيغة والحساب",
+                "how_to_use_this_tool": "كيف يمكن استخدام هذه الأداة",
+                "close_button": "إغلاق"
+                
             },
-            "zh": {
-                # App Title and Navigation
-                "app_title": "贝尼什M分数财务分析工具",
-                "back": "返回",
-                "help": "帮助",
-                "faq": "常见问题",
-                "about": "关于",
-                "settings": "设置",
-                "language": "语言",
-                
-                # Formula and Calculation Labels
-                "formula_calculation": "公式与计算",
-                "formula_label": "公式：",
-                "calculation_label": "计算：",
-                
-                # Ratio Names
-                "dsri_name": "应收账款销售指数 (DSRI)",
-                "gmi_name": "毛利率指数 (GMI)",
-                "aqi_name": "资产质量指数 (AQI)",
-                "sgi_name": "销售增长指数 (SGI)",
-                "depi_name": "折旧指数 (DEPI)",
-                "sgai_name": "销售管理费用指数 (SGAI)",
-                "lvgi_name": "杠杆指数 (LVGI)",
-                "tata_name": "总应计项目占总资产比 (TATA)",
-                
-                # Ratio Descriptions
-                "dsri_desc": "衡量应收账款相对于销售的变化",
-                "gmi_desc": "衡量毛利率的变化",
-                "aqi_desc": "衡量资产质量的变化",
-                "sgi_desc": "衡量销售增长率",
-                "depi_desc": "衡量折旧率的变化",
-                "sgai_desc": "衡量销售管理费用的变化",
-                "lvgi_desc": "衡量杠杆变化",
-                "tata_desc": "衡量总应计项目占总资产的百分比",
-                
-                # Add more Chinese translations as needed...
-            }
+
         }
     
     def get_text(self, key: str) -> str:

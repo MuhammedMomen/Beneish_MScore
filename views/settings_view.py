@@ -194,7 +194,7 @@ class SettingsView:
         
         return ft.Container(
             content=ft.Column([
-                ft.Text("AI Provider Configuration", size=18, weight=ft.FontWeight.BOLD),
+                ft.Text(self.translation_manager.get_text("ai_provider_configuration"), size=18, weight=ft.FontWeight.BOLD),
                 self.provider_dropdown,
                 self.model_dropdown
             ]),
@@ -206,7 +206,7 @@ class SettingsView:
     def build_api_key_section(self) -> ft.Control:
         """Build the API key configuration section."""
         self.api_key_input = ft.TextField(
-            label="API Key", password=True, can_reveal_password=True,
+            label=self.translation_manager.get_text("api_key"), password=True, can_reveal_password=True,
             on_change=self.on_api_key_changed
         )
         
@@ -214,7 +214,7 @@ class SettingsView:
         self.api_key_status_text = ft.Text(size=14)
         
         test_button = ft.ElevatedButton(
-            text="Test & Save Configuration",
+            text=self.translation_manager.get_text("test_save_configuration"),
             icon=Icons.PLAY_ARROW_ROUNDED,
             on_click=self.test_configuration,
             style=ft.ButtonStyle(bgcolor=self.config.colors.secondary, color=ft.colors.WHITE),
@@ -242,10 +242,10 @@ class SettingsView:
         status_color = self.config.colors.accent if llm_config['status'] == 'Configured' else self.config.colors.warning
         
         config_info_controls = [
-            ft.Text("Current Status", weight=ft.FontWeight.BOLD, size=16),
-            ft.Text(f"Provider: {llm_config['provider'] or 'Not Set'}", size=14),
-            ft.Text(f"Model: {llm_config['model'] or 'Not Set'}", size=14),
-            ft.Text(f"Status: {llm_config['status']}", size=14, color=status_color)
+            ft.Text(self.translation_manager.get_text("current_status"), weight=ft.FontWeight.BOLD, size=16),
+            ft.Text(f"{self.translation_manager.get_text('provider')}: {llm_config['provider'] or self.translation_manager.get_text('not_set')}", size=14),
+            ft.Text(f"{self.translation_manager.get_text('model')}: {llm_config['model'] or self.translation_manager.get_text('not_set')}", size=14),
+            ft.Text(f"{self.translation_manager.get_text('status')}: {llm_config['status']}", size=14, color=status_color)
         ]
         
         return ft.Container(

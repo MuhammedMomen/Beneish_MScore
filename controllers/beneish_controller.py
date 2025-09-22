@@ -319,15 +319,15 @@ class BeneishController:
                         ft.Container(height=10),
                         ft.Row([
                             ft.Icon(Icons.EMAIL, size=20),
-                            ft.Text("developer@example.com", size=14)
+                            ft.Text(self.translation_manager.get_text("developer_email"), size=14)
                         ]),
                         ft.Row([
                             ft.Icon(Icons.BUSINESS, size=20),
-                            ft.Text("Financial Analysis Solutions", size=14)
+                            ft.Text(self.translation_manager.get_text("company_name"), size=14)
                         ]),
                         ft.Row([
                             ft.Icon(Icons.WEB, size=20),
-                            ft.Text("www.example.com", size=14)
+                            ft.Text(self.translation_manager.get_text("website"), size=14)
                         ])
                     ]),
                     padding=15
