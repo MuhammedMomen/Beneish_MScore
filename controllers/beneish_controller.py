@@ -44,6 +44,18 @@ class BeneishController:
         self.page.scroll = ft.ScrollMode.AUTO
         self.page.rtl = self.translation_manager.get_current_language() == "ar"
         
+        # Setup theme with Cairo fonts
+        self.page.theme = ft.Theme(
+            font_family="Cairo"
+        )
+        
+        # Setup fonts
+        self.page.fonts = {
+            "Cairo": "fonts/Cairo-Regular.ttf",
+            "Cairo-Light": "fonts/Cairo-Light.ttf",
+            "Cairo-Medium": "fonts/Cairo-Medium.ttf"
+        }
+        
         # Setup AppBar
         self.setup_appbar()
         
@@ -101,7 +113,8 @@ class BeneishController:
             title=ft.Text(
                 self.translation_manager.get_text("app_title"),
                 size=20,
-                weight=ft.FontWeight.BOLD
+                weight=ft.FontWeight.BOLD,
+                color=ft.colors.WHITE
             ),
             center_title=False,
             bgcolor=self.config.colors.primary,

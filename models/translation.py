@@ -68,6 +68,11 @@ class TranslationManager:
                 "lvgi_desc": "Measures the change in leverage",
                 "tata_desc": "Measures total accruals as percentage of total assets",
                 
+                # Formula and Calculation Labels
+                "formula_calculation": "Formula & Calculation",
+                "formula_label": "Formula:",
+                "calculation_label": "Calculation:",
+                
                 # Error Messages
                 "error_file_read": "Error reading file. Please check the file format.",
                 "error_no_data": "Could not extract financial data from the file.",
@@ -111,7 +116,7 @@ This tool is for educational and analysis purposes only.""",
             },
             "ar": {
                 # App Title and Navigation (Arabic translations)
-                "app_title": "حاسبة نتيجة بينيش إم",
+                "app_title": "نتيجة نموذج بينيش إم",
                 "back": "رجوع",
                 "help": "مساعدة",
                 "faq": "أسئلة شائعة",
@@ -185,6 +190,43 @@ This tool is for educational and analysis purposes only.""",
 هذه الأداة للأغراض التعليمية والتحليلية فقط.""",
 
                 # Add more Arabic translations as needed...
+            },
+            "zh": {
+                # App Title and Navigation
+                "app_title": "贝尼什M分数财务分析工具",
+                "back": "返回",
+                "help": "帮助",
+                "faq": "常见问题",
+                "about": "关于",
+                "settings": "设置",
+                "language": "语言",
+                
+                # Formula and Calculation Labels
+                "formula_calculation": "公式与计算",
+                "formula_label": "公式：",
+                "calculation_label": "计算：",
+                
+                # Ratio Names
+                "dsri_name": "应收账款销售指数 (DSRI)",
+                "gmi_name": "毛利率指数 (GMI)",
+                "aqi_name": "资产质量指数 (AQI)",
+                "sgi_name": "销售增长指数 (SGI)",
+                "depi_name": "折旧指数 (DEPI)",
+                "sgai_name": "销售管理费用指数 (SGAI)",
+                "lvgi_name": "杠杆指数 (LVGI)",
+                "tata_name": "总应计项目占总资产比 (TATA)",
+                
+                # Ratio Descriptions
+                "dsri_desc": "衡量应收账款相对于销售的变化",
+                "gmi_desc": "衡量毛利率的变化",
+                "aqi_desc": "衡量资产质量的变化",
+                "sgi_desc": "衡量销售增长率",
+                "depi_desc": "衡量折旧率的变化",
+                "sgai_desc": "衡量销售管理费用的变化",
+                "lvgi_desc": "衡量杠杆变化",
+                "tata_desc": "衡量总应计项目占总资产的百分比",
+                
+                # Add more Chinese translations as needed...
             }
         }
     

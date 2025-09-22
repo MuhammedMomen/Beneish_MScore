@@ -8,7 +8,6 @@ import os
 from dotenv import load_dotenv
 
 def main(page: ft.Page):
-    page.title = "Beneish MScore"
     page.auto_scroll = True
     page.window.full_screen = True
     # Load environment variables

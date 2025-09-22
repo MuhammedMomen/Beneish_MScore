@@ -206,7 +206,7 @@ class ResultsView:
         )
     
     def build_ratios_section(self) -> ft.Control:
-        """Build financial ratios section"""
+        """Build financial ratios section with detailed formula calculations"""
         if not self.result.ratios:
             return ft.Container()
         
@@ -223,9 +223,11 @@ class ResultsView:
         
         ratios_dict = self.result.ratios.to_dict()
         
-        # Create ratio cards
+        # Create enhanced ratio cards with formula calculations
         ratio_cards = []
         for name, value in ratios_dict.items():
+            formula_details = self._get_formula_details(name)
+            
             card = ft.Container(
                 content=ft.Column([
                     ft.Text(
@@ -247,14 +249,26 @@ class ResultsView:
                         size=12,
                         color=ft.colors.GREY_600,
                         text_align=ft.TextAlign.CENTER
+                    ),
+                    ft.Container(
+                        content=ft.Row([
+                            ft.IconButton(
+                                icon=ft.icons.HELP_OUTLINE,
+                                icon_size=24,
+                                tooltip=f"{formula_details['formula']}\n\n{formula_details['calculation']}",
+                                icon_color=self.config.colors.accent,
+                                on_click=lambda e, details=formula_details: self._show_formula_dialog(e, details)
+                            )
+                        ], alignment=ft.MainAxisAlignment.CENTER),
+                        margin=ft.margin.only(top=5)
                     )
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
                 bgcolor=ft.colors.WHITE,
                 padding=15,
                 border_radius=10,
                 border=ft.border.all(1, ft.colors.GREY_300),
-                width=280,
-                height=140
+                width=320,
+                height=190
             )
             ratio_cards.append(card)
         
@@ -286,6 +300,111 @@ class ResultsView:
             border_radius=15,
             border=ft.border.all(1, ft.colors.with_opacity(0.2, self.config.colors.primary))
         )
+    
+    def _get_formula_details(self, ratio_name: str) -> dict:
+        """Get formula and calculation details for a specific ratio"""
+        year_1 = self.result.financial_data.year_1_data
+        year_2 = self.result.financial_data.year_2_data
+        
+        def safe_divide(a, b, default=1):
+            return a / b if b != 0 else default
+        
+        def format_number(num):
+            return f"{num:,.0f}" if abs(num) >= 1 else f"{num:.3f}"
+        
+        if ratio_name == "DSRI":
+            # Days Sales in Receivables Index
+            dsr_1 = safe_divide(year_1.get('accounts_receivables', 0), year_1.get('revenue', 1)) * 365
+            dsr_2 = safe_divide(year_2.get('accounts_receivables', 0), year_2.get('revenue', 1)) * 365
+            
+            return {
+                "formula": "DSRI = (AR₂/Sales₂ × 365) ÷ (AR₁/Sales₁ × 365)",
+                "calculation": f"DSRI = ({format_number(year_2.get('accounts_receivables', 0))}/{format_number(year_2.get('revenue', 1))} × 365) ÷ ({format_number(year_1.get('accounts_receivables', 0))}/{format_number(year_1.get('revenue', 1))} × 365)\n= {dsr_2:.1f} ÷ {dsr_1:.1f} = {safe_divide(dsr_2, dsr_1):.3f}",
+                "tooltip": f"DSRI = (AR₂/Sales₂ × 365) ÷ (AR₁/Sales₁ × 365)\n\nDSRI = ({format_number(year_2.get('accounts_receivables', 0))}/{format_number(year_2.get('revenue', 1))} × 365) ÷ ({format_number(year_1.get('accounts_receivables', 0))}/{format_number(year_1.get('revenue', 1))} × 365)\n= {dsr_2:.1f} ÷ {dsr_1:.1f} = {safe_divide(dsr_2, dsr_1):.3f}"[:100] + "..."
+            }
+        
+        elif ratio_name == "GMI":
+            # Gross Margin Index
+            gm_1 = safe_divide(year_1.get('revenue', 0) - year_1.get('cost_of_goods_sold', 0), year_1.get('revenue', 1))
+            gm_2 = safe_divide(year_2.get('revenue', 0) - year_2.get('cost_of_goods_sold', 0), year_2.get('revenue', 1))
+            
+            return {
+                "formula": "GMI = Gross Margin₁ ÷ Gross Margin₂",
+                "calculation": f"GMI = {gm_1:.3f} ÷ {gm_2:.3f} = {safe_divide(gm_1, gm_2):.3f}\nGross Margin₁ = ({format_number(year_1.get('revenue', 0))} - {format_number(year_1.get('cost_of_goods_sold', 0))}) ÷ {format_number(year_1.get('revenue', 1))}\nGross Margin₂ = ({format_number(year_2.get('revenue', 0))} - {format_number(year_2.get('cost_of_goods_sold', 0))}) ÷ {format_number(year_2.get('revenue', 1))}",
+                "tooltip": f"GMI = Gross Margin₁ ÷ Gross Margin₂\n\nGMI = {gm_1:.3f} ÷ {gm_2:.3f} = {safe_divide(gm_1, gm_2):.3f}\nGross Margin₁ = ({format_number(year_1.get('revenue', 0))} - {format_number(year_1.get('cost_of_goods_sold', 0))}) ÷ {format_number(year_1.get('revenue', 1))}\nGross Margin₂ = ({format_number(year_2.get('revenue', 0))} - {format_number(year_2.get('cost_of_goods_sold', 0))}) ÷ {format_number(year_2.get('revenue', 1))}"[:100] + "..."
+            }
+        
+        elif ratio_name == "AQI":
+            # Asset Quality Index
+            qa_1 = year_1.get('current_assets', 0) + year_1.get('property_plant_equipment', 0) + year_1.get('securities', 0)
+            qa_2 = year_2.get('current_assets', 0) + year_2.get('property_plant_equipment', 0) + year_2.get('securities', 0)
+            aqi_1 = 1 - safe_divide(qa_1, year_1.get('total_assets', 1), 0)
+            aqi_2 = 1 - safe_divide(qa_2, year_2.get('total_assets', 1), 0)
+            
+            return {
+                "formula": "AQI = (1 - Quality Assets₂/Total Assets₂) ÷ (1 - Quality Assets₁/Total Assets₁)",
+                "calculation": f"AQI = {aqi_2:.3f} ÷ {aqi_1:.3f} = {safe_divide(aqi_2, aqi_1):.3f}\nQuality Assets₂ = {format_number(qa_2)}\nQuality Assets₁ = {format_number(qa_1)}",
+                "tooltip": f"AQI = (1 - Quality Assets₂/Total Assets₂) ÷ (1 - Quality Assets₁/Total Assets₁)\n\nAQI = {aqi_2:.3f} ÷ {aqi_1:.3f} = {safe_divide(aqi_2, aqi_1):.3f}\nQuality Assets₂ = {format_number(qa_2)}\nQuality Assets₁ = {format_number(qa_1)}"[:100] + "..."
+            }
+        
+        elif ratio_name == "SGI":
+            # Sales Growth Index
+            return {
+                "formula": "SGI = Sales₂ ÷ Sales₁",
+                "calculation": f"SGI = {format_number(year_2.get('revenue', 0))} ÷ {format_number(year_1.get('revenue', 1))} = {safe_divide(year_2.get('revenue', 0), year_1.get('revenue', 1)):.3f}",
+                "tooltip": f"SGI = Sales₂ ÷ Sales₁\n\nSGI = {format_number(year_2.get('revenue', 0))} ÷ {format_number(year_1.get('revenue', 1))} = {safe_divide(year_2.get('revenue', 0), year_1.get('revenue', 1)):.3f}"[:100] + "..."
+            }
+        
+        elif ratio_name == "DEPI":
+            # Depreciation Index
+            depr_rate_1 = safe_divide(year_1.get('depreciation', 0), year_1.get('depreciation', 0) + year_1.get('property_plant_equipment', 1))
+            depr_rate_2 = safe_divide(year_2.get('depreciation', 0), year_2.get('depreciation', 0) + year_2.get('property_plant_equipment', 1))
+            
+            return {
+                "formula": "DEPI = Depreciation Rate₁ ÷ Depreciation Rate₂",
+                "calculation": f"DEPI = {depr_rate_1:.3f} ÷ {depr_rate_2:.3f} = {safe_divide(depr_rate_1, depr_rate_2):.3f}\nDepr Rate₁ = {format_number(year_1.get('depreciation', 0))} ÷ ({format_number(year_1.get('depreciation', 0))} + {format_number(year_1.get('property_plant_equipment', 1))})\nDepr Rate₂ = {format_number(year_2.get('depreciation', 0))} ÷ ({format_number(year_2.get('depreciation', 0))} + {format_number(year_2.get('property_plant_equipment', 1))})",
+                "tooltip": f"DEPI = Depreciation Rate₁ ÷ Depreciation Rate₂\n\nDEPI = {depr_rate_1:.3f} ÷ {depr_rate_2:.3f} = {safe_divide(depr_rate_1, depr_rate_2):.3f}\nDepr Rate₁ = {format_number(year_1.get('depreciation', 0))} ÷ ({format_number(year_1.get('depreciation', 0))} + {format_number(year_1.get('property_plant_equipment', 1))})\nDepr Rate₂ = {format_number(year_2.get('depreciation', 0))} ÷ ({format_number(year_2.get('depreciation', 0))} + {format_number(year_2.get('property_plant_equipment', 1))})"[:100] + "..."
+            }
+        
+        elif ratio_name == "SGAI":
+            # SGA Expenses Index
+            sga_rate_1 = safe_divide(year_1.get('selling_general_admin_expense', 0), year_1.get('revenue', 1))
+            sga_rate_2 = safe_divide(year_2.get('selling_general_admin_expense', 0), year_2.get('revenue', 1))
+            
+            return {
+                "formula": "SGAI = SGA Rate₂ ÷ SGA Rate₁",
+                "calculation": f"SGAI = {sga_rate_2:.3f} ÷ {sga_rate_1:.3f} = {safe_divide(sga_rate_2, sga_rate_1):.3f}\nSGA Rate₂ = {format_number(year_2.get('selling_general_admin_expense', 0))} ÷ {format_number(year_2.get('revenue', 1))}\nSGA Rate₁ = {format_number(year_1.get('selling_general_admin_expense', 0))} ÷ {format_number(year_1.get('revenue', 1))}",
+                "tooltip": f"SGAI = SGA Rate₂ ÷ SGA Rate₁\n\nSGAI = {sga_rate_2:.3f} ÷ {sga_rate_1:.3f} = {safe_divide(sga_rate_2, sga_rate_1):.3f}\nSGA Rate₂ = {format_number(year_2.get('selling_general_admin_expense', 0))} ÷ {format_number(year_2.get('revenue', 1))}\nSGA Rate₁ = {format_number(year_1.get('selling_general_admin_expense', 0))} ÷ {format_number(year_1.get('revenue', 1))}"[:100] + "..."
+            }
+        
+        elif ratio_name == "LVGI":
+            # Leverage Index
+            leverage_1 = safe_divide(year_1.get('current_liabilities', 0) + year_1.get('total_long_term_debt', 0), year_1.get('total_assets', 1))
+            leverage_2 = safe_divide(year_2.get('current_liabilities', 0) + year_2.get('total_long_term_debt', 0), year_2.get('total_assets', 1))
+            
+            return {
+                "formula": "LVGI = Leverage₂ ÷ Leverage₁",
+                "calculation": f"LVGI = {leverage_2:.3f} ÷ {leverage_1:.3f} = {safe_divide(leverage_2, leverage_1):.3f}\nLeverage₂ = ({format_number(year_2.get('current_liabilities', 0))} + {format_number(year_2.get('total_long_term_debt', 0))}) ÷ {format_number(year_2.get('total_assets', 1))}\nLeverage₁ = ({format_number(year_1.get('current_liabilities', 0))} + {format_number(year_1.get('total_long_term_debt', 0))}) ÷ {format_number(year_1.get('total_assets', 1))}",
+                "tooltip": f"LVGI = Leverage₂ ÷ Leverage₁\n\nLVGI = {leverage_2:.3f} ÷ {leverage_1:.3f} = {safe_divide(leverage_2, leverage_1):.3f}\nLeverage₂ = ({format_number(year_2.get('current_liabilities', 0))} + {format_number(year_2.get('total_long_term_debt', 0))}) ÷ {format_number(year_2.get('total_assets', 1))}\nLeverage₁ = ({format_number(year_1.get('current_liabilities', 0))} + {format_number(year_1.get('total_long_term_debt', 0))}) ÷ {format_number(year_1.get('total_assets', 1))}"[:100] + "..."
+            }
+        
+        elif ratio_name == "TATA":
+            # Total Accruals to Total Assets
+            income_before_extra = year_2.get('net_income_continuing_operations', 0)
+            cash_flow_ops = year_2.get('cash_flow_operations', 0)
+            total_assets = year_2.get('total_assets', 1)
+            
+            return {
+                "formula": "TATA = (Net Income - Cash Flow from Operations) ÷ Total Assets",
+                "calculation": f"TATA = ({format_number(income_before_extra)} - {format_number(cash_flow_ops)}) ÷ {format_number(total_assets)}\n= {format_number(income_before_extra - cash_flow_ops)} ÷ {format_number(total_assets)} = {safe_divide(income_before_extra - cash_flow_ops, total_assets, 0):.3f}",
+                "tooltip": f"TATA = (Net Income - Cash Flow from Operations) ÷ Total Assets\n\nTATA = ({format_number(income_before_extra)} - {format_number(cash_flow_ops)}) ÷ {format_number(total_assets)}\n= {format_number(income_before_extra - cash_flow_ops)} ÷ {format_number(total_assets)} = {safe_divide(income_before_extra - cash_flow_ops, total_assets, 0):.3f}"[:100] + "..."
+            }
+        
+        return {
+            "formula": "Formula not available",
+            "calculation": "Calculation details not available",
+            "tooltip": "Formula not available\n\nCalculation details not available"[:100] + "..."
+        }
     
     def build_data_section(self) -> ft.Control:
         """Build extracted financial data section"""
@@ -383,3 +502,49 @@ class ResultsView:
         elif "likely" in interpretation:
             return self.translation_manager.get_text("high_risk_desc")
         return interpretation
+    
+    def _show_formula_dialog(self, e, formula_details: dict):
+        """Show formula details in a dialog"""
+        dialog = ft.AlertDialog(
+            title=ft.Text("Formula & Calculation Details", weight=ft.FontWeight.BOLD),
+            content=ft.Container(
+                content=ft.Column([
+                    ft.Text(
+                        "Formula:",
+                        size=14,
+                        weight=ft.FontWeight.BOLD,
+                        color=self.config.colors.primary
+                    ),
+                    ft.Text(
+                        formula_details["formula"],
+                        size=12,
+                        color=ft.colors.GREY_800,
+                        selectable=True
+                    ),
+                    ft.Container(height=10),
+                    ft.Text(
+                        "Calculation:",
+                        size=14,
+                        weight=ft.FontWeight.BOLD,
+                        color=self.config.colors.primary
+                    ),
+                    ft.Text(
+                        formula_details["calculation"],
+                        size=12,
+                        color=ft.colors.GREY_800,
+                        selectable=True
+                    )
+                ], spacing=5),
+                width=500,
+                height=300
+            ),
+            actions=[
+                ft.TextButton(
+                    "Close",
+                    on_click=lambda _: self.page.close(dialog)
+                )
+            ]
+        )
+        
+        self.page.open(dialog)
+        self.page.update()

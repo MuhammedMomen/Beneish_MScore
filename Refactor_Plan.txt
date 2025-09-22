@@ -11,10 +11,10 @@ Perfect it works but I noticed these points to amend:
 5- kpis cards and explanation are not translated in arabic view, it should be translated and should show the figure calculation either interactively or via tooltip follow UI best practice to do this specific task.
 
 6- I noticed the threshold of analyzed company was set to around 2.5 while the threshold of the main formula is 
-( The primary threshold for the Beneish M-Score is -1.78. A score below -1.78 suggests a company is unlikely to be manipulating earnings, while a score above -1.78 indicates a higher probability that the company is a manipulator)
+( The primary threshold for the Beneish M-Score is -1.78. A score below -1.78 suggests a company is unlikely to be manipulating earnings, while a score above -1.78 indicates a higher probability that the company is a manipulator) Done
 
 7- provide export as button that export final detailed report to formats (pdf & excel) with choosing location to save file.
 
-8- Kpi's cards section should show the complete formula calculation rule and the apply to curent analyzed company with extracted figures.  
+8- Kpi's cards section should show the complete formula calculation rule and the apply to curent analyzed company with extracted figures.(Done)  
 
 9- provide full log in logs directory for application interaction, also provide full log separate for AI interaction and analyzing process. 
