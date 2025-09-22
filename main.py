@@ -1,5 +1,6 @@
 # main.py - Entry point and main application controller
 import flet as ft
+from flet.flet_socket_server import PageCommandResponsePayload
 from controllers.beneish_controller import BeneishController
 from models.translation import TranslationManager
 from utils.config import Config
@@ -7,6 +8,9 @@ import os
 from dotenv import load_dotenv
 
 def main(page: ft.Page):
+    page.title = "Beneish MScore"
+    page.auto_scroll = True
+    page.window.full_screen = True
     # Load environment variables
     load_dotenv()
     

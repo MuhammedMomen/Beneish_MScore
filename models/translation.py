@@ -54,8 +54,8 @@ class TranslationManager:
                 "low_risk_desc": "Company is not likely to have manipulated their earnings",
                 "high_risk_desc": "Company is likely to have manipulated their earnings",
                 "interpretation_guide": "Interpretation Guide:",
-                "guide_low": "M-Score < -2.22: Low risk of earnings manipulation",
-                "guide_high": "M-Score > -2.22: High risk of earnings manipulation",
+                "guide_low": "M-Score < -1.78: Low risk of earnings manipulation",
+                "guide_high": "M-Score > -1.78: High risk of earnings manipulation",
                 "rerun_analysis": "Run New Analysis",
                 
                 # Ratio Descriptions
@@ -86,7 +86,7 @@ It's a red flag tool that helps:
 • Analysts assess earnings quality
 • Regulators detect suspicious financial reporting
 
-The model assigns probabilities based on financial statement data. A score above -2.22 suggests higher likelihood of earnings manipulation.
+The model assigns probabilities based on financial statement data. A score above -1.78 suggests higher likelihood of earnings manipulation.
 
 This tool is for educational and analysis purposes only.""",
                 
@@ -158,8 +158,8 @@ This tool is for educational and analysis purposes only.""",
                 "low_risk_desc": "الشركة غير محتملة لتلاعب في الأرباح",
                 "high_risk_desc": "الشركة محتملة لتلاعب في الأرباح",
                 "interpretation_guide": "دليل التفسير:",
-                "guide_low": "النتيجة < -2.22: مخاطر منخفضة لتلاعب في الأرباح",
-                "guide_high": "النتيجة > -2.22: مخاطر عالية لتلاعب في الأرباح",
+                "guide_low": "النتيجة < -1.78: مخاطر منخفضة لتلاعب في الأرباح",
+                "guide_high": "النتيجة > -1.78: مخاطر عالية لتلاعب في الأرباح",
                 "rerun_analysis": "تشغيل تحليل جديد",
                 
                 # Error Messages
@@ -180,7 +180,7 @@ This tool is for educational and analysis purposes only.""",
 • المحللين على تقييم جودة الأرباح  
 • الجهات التنظيمية على اكتشاف التقارير المالية المشبوهة
 
-يعين النموذج احتماليات بناءً على بيانات البيان المالي. النتيجة أعلى من -2.22 تشير إلى احتمالية أعلى لتلاعب في الأرباح.
+يعين النموذج احتماليات بناءً على بيانات البيان المالي. النتيجة أعلى من -1.78 تشير إلى احتمالية أعلى لتلاعب في الأرباح.
 
 هذه الأداة للأغراض التعليمية والتحليلية فقط.""",
 

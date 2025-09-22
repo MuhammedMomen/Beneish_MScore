@@ -56,7 +56,7 @@ class AnalysisResult:
     
     def get_risk_color(self) -> str:
         """Get color code based on risk level"""
-        return "#ef4444" if self.m_score and self.m_score > -2.22 else "#10b981"
+        return "#ef4444" if self.m_score and self.m_score > -1.78 else "#10b981"
 
 class BeneishCalculator:
     """Core calculation logic for Beneish M-Score"""
@@ -153,7 +153,7 @@ class BeneishCalculator:
     @staticmethod
     def interpret_score(m_score: float) -> tuple[str, str]:
         """Interpret the M-Score result"""
-        if m_score < -2.22:
+        if m_score < -1.78:
             return "LOW RISK", "Company is not likely to have manipulated their earnings"
         else:
             return "HIGH RISK", "Company is likely to have manipulated their earnings"

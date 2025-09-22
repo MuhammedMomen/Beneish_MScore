@@ -8,7 +8,7 @@ A sophisticated desktop application for detecting potential earnings manipulatio
 
 ## 🎯 What is the Beneish M-Score?
 
-The Beneish M-Score is a mathematical model created by Professor Messod Beneish that uses eight financial ratios to identify companies that may have manipulated their earnings. A score greater than -2.22 suggests a higher probability of earnings manipulation.
+The Beneish M-Score is a mathematical model created by Professor Messod Beneish that uses eight financial ratios to identify companies that may have manipulated their earnings. A score greater than -1.78 suggests a higher probability of earnings manipulation.
 
 ### The Eight Key Ratios:
 1. **DSRI** - Days Sales in Receivables Index
@@ -148,7 +148,7 @@ DEFAULT_LANGUAGE=en
 
 5. **Review Results**
    - View the calculated M-Score
-   - Check the risk assessment (Low Risk < -2.22 < High Risk)
+   - Check the risk assessment (Low Risk < -1.78 < High Risk)
    - Examine individual ratio calculations
    - Read explanations for each financial ratio
 
@@ -159,8 +159,8 @@ DEFAULT_LANGUAGE=en
 ### Understanding the Results
 
 #### M-Score Interpretation
-- **Score < -2.22**: Lower probability of earnings manipulation
-- **Score > -2.22**: Higher probability of earnings manipulation
+- **Score < -1.78**: Lower probability of earnings manipulation
+- **Score > -1.78**: Higher probability of earnings manipulation
 - **Score > 0**: Significant red flags present
 
 #### Individual Ratios

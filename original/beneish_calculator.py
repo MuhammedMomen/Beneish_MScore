@@ -210,7 +210,7 @@ class BeneishCalculator:
     
     def interpret_score(self, m_score: float) -> tuple[str, str]:
         """Interpret the M-Score result"""
-        if m_score < -2.22:
+        if m_score < -1.78:
             return "LOW RISK", "Company is not likely to have manipulated their earnings"
         else:
             return "HIGH RISK", "Company is likely to have manipulated their earnings"
@@ -507,7 +507,7 @@ class BeneishApp:
             ])
             
             # M-Score result
-            score_color = danger_color if m_score > -2.22 else accent_color
+            score_color = danger_color if m_score > -1.78 else accent_color
             
             score_container.content = ft.Container(
                 content=ft.Column([
@@ -550,12 +550,12 @@ class BeneishApp:
                                 color=primary_color
                             ),
                             ft.Text(
-                                "• M-Score < -2.22: Low risk of earnings manipulation",
+                                "• M-Score < -1.78: Low risk of earnings manipulation",
                                 size=12,
                                 color="grey"
                             ),
                             ft.Text(
-                                "• M-Score > -2.22: High risk of earnings manipulation",
+                                "• M-Score > -1.78: High risk of earnings manipulation",
                                 size=12,
                                 color="grey"
                             )
