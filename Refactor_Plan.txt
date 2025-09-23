@@ -1,17 +1,19 @@
 Perfect it works but I noticed these points to amend:
 
-1- The title of top app bar need to be white too as it is not visually contrasting with dark background of top app bar
+1- The title of top app bar need to be white too as it is not visually contrasting with dark background of top app bar (Done)
 
-2- Use Cairo Fonts in assets/fonts folder with different sizes for the Arabic view of the App.
+2- Use Cairo Fonts in assets/fonts folder with different sizes for the Arabic view of the App.(Done)
 
-3- Enhance the UI and visuall appeal of return button after analysis is done.
+3- Enhance the UI and visuall appeal of rerun analysis button to look more professional.
 
 4- Amend the final output to be presented on tabbed view instead of scrolling.
 
-5- kpis cards and explanation are not translated in arabic view, it should be translated and should show the figure calculation either interactively or via tooltip follow UI best practice to do this specific task.
+5- kpis cards and explanation are not translated in arabic view, it should be translated and should show 
+the figure calculation either interactively or via tooltip follow UI best practice to do this specific task.(Done)
 
 6- I noticed the threshold of analyzed company was set to around 2.5 while the threshold of the main formula is 
-( The primary threshold for the Beneish M-Score is -1.78. A score below -1.78 suggests a company is unlikely to be manipulating earnings, while a score above -1.78 indicates a higher probability that the company is a manipulator) Done
+( The primary threshold for the Beneish M-Score is -1.78. A score below -1.78 suggests a company is unlikely to be manipulating earnings, while a score above
+ -1.78 indicates a higher probability that the company is a manipulator) Done
 
 7- provide export as button that export final detailed report to formats (pdf & excel) with choosing location to save file.
 

@@ -65,38 +65,72 @@ class BeneishController:
     
     def setup_appbar(self):
         """Setup application bar with navigation and actions"""
-        actions = [
-            ft.IconButton(
-                Icons.TRANSLATE,
-                tooltip=self.translation_manager.get_text("language"),
-                on_click=self.toggle_language,
-                icon_color=ft.colors.WHITE
-            ),
-            ft.IconButton(
-                Icons.HELP,
-                tooltip=self.translation_manager.get_text("help"),
-                on_click=self.show_help_dialog,
-                icon_color=ft.colors.WHITE
-            ),
-            ft.IconButton(
-                Icons.QUIZ,
-                tooltip=self.translation_manager.get_text("faq"),
-                on_click=self.show_faq_dialog,
-                icon_color=ft.colors.WHITE
-            ),
-            ft.IconButton(
-                Icons.INFO,
-                tooltip=self.translation_manager.get_text("about"),
-                on_click=self.show_about_dialog,
-                icon_color=ft.colors.WHITE
-            ),
-            ft.IconButton(
-                Icons.SETTINGS,
-                tooltip=self.translation_manager.get_text("settings"),
-                on_click=self.show_settings,
-                icon_color=ft.colors.WHITE
-            )
-        ]
+        # Check if screen is small (mobile/tablet)
+        is_small_screen = self.page.window_width < 800 if self.page.window_width else False
+        
+        if is_small_screen:
+            # Use icon buttons for small screens
+            actions = [
+                ft.IconButton(
+                    Icons.TRANSLATE,
+                    tooltip=self.translation_manager.get_text("language"),
+                    on_click=self.toggle_language,
+                    icon_color=ft.colors.WHITE
+                ),
+                ft.IconButton(
+                    Icons.HELP,
+                    tooltip=self.translation_manager.get_text("help"),
+                    on_click=self.show_help_dialog,
+                    icon_color=ft.colors.WHITE
+                ),
+                ft.IconButton(
+                    Icons.QUIZ,
+                    tooltip=self.translation_manager.get_text("faq"),
+                    on_click=self.show_faq_dialog,
+                    icon_color=ft.colors.WHITE
+                ),
+                ft.IconButton(
+                    Icons.INFO,
+                    tooltip=self.translation_manager.get_text("about"),
+                    on_click=self.show_about_dialog,
+                    icon_color=ft.colors.WHITE
+                ),
+                ft.IconButton(
+                    Icons.SETTINGS,
+                    tooltip=self.translation_manager.get_text("settings"),
+                    on_click=self.show_settings,
+                    icon_color=ft.colors.WHITE
+                )
+            ]
+        else:
+            # Use text buttons for larger screens
+            actions = [
+                ft.TextButton(
+                    text=self.translation_manager.get_text("language"),
+                    on_click=self.toggle_language,
+                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                ),
+                ft.TextButton(
+                    text=self.translation_manager.get_text("help"),
+                    on_click=self.show_help_dialog,
+                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                ),
+                ft.TextButton(
+                    text=self.translation_manager.get_text("faq"),
+                    on_click=self.show_faq_dialog,
+                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                ),
+                ft.TextButton(
+                    text=self.translation_manager.get_text("about"),
+                    on_click=self.show_about_dialog,
+                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                ),
+                ft.TextButton(
+                    text=self.translation_manager.get_text("settings"),
+                    on_click=self.show_settings,
+                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                )
+            ]
         
         # Add back button when not on main view
         leading = None
