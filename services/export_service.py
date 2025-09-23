@@ -81,7 +81,7 @@ class ExportService:
                 ["Interpretation", self.translation_manager.get_text("high_risk_desc" if result.m_score and result.m_score > -1.78 else "low_risk_desc")]
             ]
             
-            m_score_table = Table(m_score_data, colWidths=[2*inch, 3*inch])
+            m_score_table = Table(m_score_data, colWidths=[1.2*inch, 3.8*inch])
             m_score_table.setStyle(TableStyle([
                 ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
                 ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -120,7 +120,7 @@ class ExportService:
                         ratio_desc = self.translation_manager.get_text(f"{ratio_key.lower()}_desc")
                         ratios_data.append([ratio_name, f"{ratio_value:.3f}", ratio_desc])
                 
-                ratios_table = Table(ratios_data, colWidths=[2*inch, 1*inch, 3*inch])
+                ratios_table = Table(ratios_data, colWidths=[1.8*inch, 1*inch, 3.2*inch])
                 ratios_table.setStyle(TableStyle([
                     ('BACKGROUND', (0, 0), (-1, 0), colors.lightgreen),
                     ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),

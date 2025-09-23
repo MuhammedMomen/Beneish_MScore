@@ -352,16 +352,30 @@ class BeneishController:
                         ),
                         ft.Container(height=10),
                         ft.Row([
-                            ft.Icon(Icons.EMAIL, size=20),
-                            ft.Text(self.translation_manager.get_text("developer_email"), size=14)
+                            ft.Icon(Icons.BUSINESS, size=20),
+                            ft.Text(self.translation_manager.get_text("developer_title"), size=14, selectable=True)
                         ]),
                         ft.Row([
-                            ft.Icon(Icons.BUSINESS, size=20),
-                            ft.Text(self.translation_manager.get_text("company_name"), size=14)
+                            ft.Icon(Icons.EMAIL, size=20),
+                            ft.TextButton(
+                                content=ft.Text(
+                                    self.translation_manager.get_text("developer_email"),
+                                    size=14
+                                ),
+                                url=f"mailto:{self.translation_manager.get_text('developer_email')}",
+                                style=ft.ButtonStyle(color=ft.colors.BLUE)
+                            )
                         ]),
                         ft.Row([
                             ft.Icon(Icons.WEB, size=20),
-                            ft.Text(self.translation_manager.get_text("website"), size=14)
+                            ft.TextButton(
+                                content=ft.Text(
+                                    self.translation_manager.get_text("website"),
+                                    size=14
+                                ),
+                                url=self.translation_manager.get_text("website"),
+                                style=ft.ButtonStyle(color=ft.colors.BLUE)
+                            )
                         ])
                     ]),
                     padding=15
