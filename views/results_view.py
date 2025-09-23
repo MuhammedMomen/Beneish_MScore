@@ -536,6 +536,7 @@ class ResultsView:
         dialog = ft.AlertDialog(
             title=ft.Text(self.translation_manager.get_text("formula_calc_details"), weight=ft.FontWeight.BOLD),
             content=ft.Container(
+                rtl=True if self.translation_manager.current_language == 'ar' else False,
                 content=ft.Column([
                     ft.Text(
                         "Formula:",
@@ -562,7 +563,7 @@ class ResultsView:
                         color=ft.colors.GREY_800,
                         selectable=True
                     )
-                ], spacing=5),
+                ], spacing=5, rtl=True if self.translation_manager.current_language == 'ar' else False),
                 width=500,
                 height=300
             ),
@@ -590,7 +591,7 @@ class ResultsView:
                     content=ft.Row([
                         ft.ProgressRing(width=16, height=16, stroke_width=2),
                         ft.Text(self.translation_manager.get_text("generating_pdf"))
-                    ], tight=True),
+                    ], tight=True, rtl=True if self.translation_manager.current_language == 'ar' else False),
                 )
                 self.page.open(loading_dialog)
                 self.page.update()
@@ -637,7 +638,7 @@ class ResultsView:
                     content=ft.Row([
                         ft.ProgressRing(width=16, height=16, stroke_width=2),
                         ft.Text(self.translation_manager.get_text("generating_excel"))
-                    ], tight=True),
+                    ], tight=True, rtl=True if self.translation_manager.current_language == 'ar' else False),
                 )
                 self.page.open(loading_dialog)
                 self.page.update()
@@ -679,7 +680,7 @@ class ResultsView:
                 ft.Icon(Icons.CHECK_CIRCLE, color=ft.colors.GREEN, size=40),
                 ft.Text(f"{format_type} {self.translation_manager.get_text('report_saved_to')}"),
                 ft.Text(file_path, selectable=True, size=12)
-            ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+            ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER, rtl=True if self.translation_manager.current_language == 'ar' else False),
             actions=[
                 ft.TextButton(
                     self.translation_manager.get_text("open_folder"),
@@ -700,8 +701,8 @@ class ResultsView:
             title=ft.Text(self.translation_manager.get_text("export_error")),
             content=ft.Column([
                 ft.Icon(Icons.ERROR, color=ft.colors.RED, size=40),
-                ft.Text(self.translation_manager.get_text("export_failed_message"))
-            ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                ft.Text(self.translation_manager.get_text("export_error_message"))
+            ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER, rtl=True if self.translation_manager.current_language == 'ar' else False),
             actions=[
                 ft.TextButton(
                     self.translation_manager.get_text("close_button"),

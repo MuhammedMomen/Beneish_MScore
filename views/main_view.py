@@ -27,6 +27,40 @@ class MainView:
         self.progress_ring = ft.ProgressRing(visible=False)
         self.status_text = ft.Text("", size=14, color=self.config.colors.primary)
         self.upload_button = None
+        self.help_dialog = self.build_help_dialog()
+        self.page.overlay.append(self.help_dialog)
+        self.page.update()
+
+    def build_help_dialog(self) -> ft.AlertDialog:
+        """Builds the help dialog with information about Dr. Messod Beneish and the Beneish M-Score model."""
+        return ft.AlertDialog(
+            modal=True,
+            title=ft.Text(self.translation_manager.get_text("model_founder_title")),
+                content=ft.Column(
+                    [
+                        ft.Text(self.translation_manager.get_text("model_founder_content")),
+                    ],
+                    scroll="always",
+                    height=300, 
+                    width=400,  
+                    rtl=True if self.translation_manager.current_language == 'ar' else False
+                ),
+            actions=[
+                ft.TextButton(
+                    self.translation_manager.get_text("close_button"),
+                    on_click=lambda e: self.close_help_dialog(e),
+                )
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+
+    def open_help_dialog(self, e):
+        self.page.open(self.help_dialog)
+        self.page.update()
+
+    def close_help_dialog(self, e):
+        self.page.close(self.help_dialog)
+        self.page.update()
         
     def build(self) -> ft.Control:
         """Build the main view"""
@@ -158,7 +192,8 @@ class MainView:
                     self.create_instruction_item("2️⃣", self.translation_manager.get_text("ai_extract_analyze")),
             self.create_instruction_item("3️⃣", self.translation_manager.get_text("view_results")),
             self.create_instruction_item("⚠️", self.translation_manager.get_text("red_flag_tool"))
-                ])
+                ]),
+                ft.Container(height=20),
             ]),
             margin=ft.margin.only(top=40),
             padding=30,

@@ -33,7 +33,8 @@ class SettingsView:
     def build(self) -> ft.Control:
         """Build the settings view by assembling its sections."""
         return ft.Column(
-            [
+            rtl=True if self.translation_manager.current_language == 'ar' else False,
+            controls=[
                 self.build_provider_section(),
                 ft.Container(height=10),
                 self.build_api_key_section(),
@@ -62,7 +63,7 @@ class SettingsView:
                     # Configure the LLM service with provider and default model
                     api_key = self.config.get_api_key(provider)
                     if api_key:
-                        self.llm_service.configure(provider, models[0], api_key)
+                        self.llm_service.initialize_llm(provider, models[0], api_key)
         
         # Update API key status
         self._update_api_key_status(provider)

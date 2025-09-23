@@ -7,6 +7,10 @@ class TranslationManager:
         self.translations = {
             "en": {
                 # App Title and Navigation
+                "model_founder": "Model Founder",
+                "model_founder_title": "About Dr. Messod Beneish",
+                "model_founder_content": "Dr. Messod Beneish is a Professor of Accounting at the Kelley School of Business, Indiana University. He developed the Beneish M-Score model to detect earnings manipulation using financial statement analysis. His research focuses on financial reporting, earnings quality, and corporate governance.",
+                "model_founder_content_ar": "الدكتور مسعود بنيش أستاذ محاسبة في كلية كيلي للأعمال بجامعة إنديانا. طور نموذج M-Score لاكتشاف التلاعب في الأرباح باستخدام تحليل البيانات المالية. يركز بحثه على التقارير المالية وجودة الأرباح وحوكمة الشركات.",
                 "app_title": "Beneish M-Score Financial Analysis Tool",
                 "back": "Back",
                 "help": "Help",
@@ -192,7 +196,10 @@ This tool is for educational and analysis purposes only.""",
                 "total_long_term_debt": "Total Long-term Debt",
                 "cash_flow_operations": "Cash Flow from Operations",
                 "expand_data_tooltip": "Click to expand financial data details",
-                "metric_column": "Metric"
+                "metric_column": "Metric",
+                "about_beneish_model_title": "About Dr. Messod Beneish and the Beneish M-Score Model",
+                "about_beneish_model_en": """The Beneish M-Score model, developed by Professor Messod Beneish of Indiana University's Kelley School of Business, is a quantitative model used to detect earnings manipulation in financial statements. First presented in his 1997 paper "Detecting GAAP Violation," and further expanded in 1999, the model utilizes eight financial ratios to generate an M-Score. A higher M-Score indicates a greater likelihood of earnings manipulation. Dr. Beneish's work has been instrumental in forensic accounting and financial fraud detection.""",
+                "about_beneish_model_ar": """نموذج بينيش إم-سكور (Beneish M-Score)، الذي طوره البروفيسور مسعود بينيش من كلية كيلي للأعمال بجامعة إنديانا، هو نموذج كمي يستخدم للكشف عن التلاعب في الأرباح في البيانات المالية. تم تقديمه لأول مرة في ورقته البحثية عام 1997 بعنوان "الكشف عن انتهاك مبادئ المحاسبة المقبولة عموماً"، وتم توسيعه لاحقًا في عام 1999. يستخدم النموذج ثماني نسب مالية لإنشاء درجة إم-سكور (M-Score)، وتشير الدرجة الأعلى إلى احتمالية أكبر للتلاعب في الأرباح. كان عمل الدكتور بينيش فعالاً في المحاسبة القضائية والكشف عن الاحتيال المالي.""",
             },
             "ar": {
                 # App Title and Navigation (Arabic translations)
@@ -203,6 +210,9 @@ This tool is for educational and analysis purposes only.""",
                 "about": "حول",
                 "settings": "الإعدادات", 
                 "language": "English",
+                "model_founder": "مؤسس النموذج",
+                "model_founder_title": "حول مؤسس النموذج",
+                "model_founder_content": """نموذج بينيش إم-سكور (Beneish M-Score)، الذي طوره البروفيسور مسعود بينيش من كلية كيلي للأعمال بجامعة إنديانا، هو نموذج كمي يستخدم للكشف عن التلاعب في الأرباح في البيانات المالية. تم تقديمه لأول مرة في ورقته البحثية عام 1997 بعنوان "الكشف عن انتهاك مبادئ المحاسبة المقبولة عموماً"، وتم توسيعه لاحقًا في عام 1999. يستخدم النموذج ثماني نسب مالية لإنشاء درجة إم-سكور (M-Score)، وتشير الدرجة الأعلى إلى احتمالية أكبر للتلاعب في الأرباح. كان عمل الدكتور بينيش فعالاً في المحاسبة القضائية والكشف عن الاحتيال المالي.""",
                 
                 # File Upload
                 "upload_title": "رفع البيانات المالية",
@@ -253,7 +263,7 @@ This tool is for educational and analysis purposes only.""",
                 "high_risk": "مخاطر عالية", 
                 "low_risk_desc": "الشركة غير محتملة لتلاعب في الأرباح",
                 "high_risk_desc": "الشركة محتملة لتلاعب في الأرباح",
-                "interpretation_guide": "دليل التفسير:",
+                "interpretation_guide": " تفسير النتيجة:",
                 "guide_low": "النتيجة < -1.78: مخاطر منخفضة لتلاعب في الأرباح",
                 "guide_high": "النتيجة > -1.78: مخاطر عالية لتلاعب في الأرباح",
                 "rerun_analysis": "تشغيل تحليل جديد",

@@ -39,7 +39,7 @@ class BeneishController:
         """Setup page configuration and theme"""
         self.page.title = self.translation_manager.get_text("app_title")
         self.page.theme_mode = ft.ThemeMode.LIGHT
-        self.page.window_width = 1400
+        self.page.window.width = 1400
         self.page.window_height = 900
         self.page.scroll = ft.ScrollMode.AUTO
         self.page.rtl = self.translation_manager.get_current_language() == "ar"
@@ -63,10 +63,15 @@ class BeneishController:
         self.file_picker = ft.FilePicker(on_result=self.on_file_picked)
         self.page.overlay.append(self.file_picker)
     
+    def show_model_founder_dialog(self, e):
+        """Show the model founder dialog"""
+        if self.main_view:
+            self.main_view.open_help_dialog(e)
+    
     def setup_appbar(self):
         """Setup application bar with navigation and actions"""
         # Check if screen is small (mobile/tablet)
-        is_small_screen = self.page.window_width < 800 if self.page.window_width else False
+        is_small_screen = self.page.window.width < 800 if self.page.window.width else False
         
         if is_small_screen:
             # Use icon buttons for small screens
@@ -77,6 +82,13 @@ class BeneishController:
                     on_click=self.toggle_language,
                     icon_color=ft.colors.WHITE
                 ),
+                ft.IconButton(
+                    Icons.PERSON,
+                    tooltip=self.translation_manager.get_text("model_founder"),
+                    on_click=self.show_model_founder_dialog,
+                    icon_color=ft.colors.WHITE
+                ),
+                
                 ft.IconButton(
                     Icons.HELP,
                     tooltip=self.translation_manager.get_text("help"),
@@ -105,6 +117,11 @@ class BeneishController:
         else:
             # Use text buttons for larger screens
             actions = [
+                ft.TextButton(
+                    text=self.translation_manager.get_text("model_founder"),
+                    on_click=self.show_model_founder_dialog,
+                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                ),
                 ft.TextButton(
                     text=self.translation_manager.get_text("language"),
                     on_click=self.toggle_language,
@@ -263,7 +280,9 @@ class BeneishController:
     
     def show_help_dialog(self, e):
         """Show help dialog"""
-        help_content = ft.Column([
+        help_content = ft.Column(
+            rtl=True if self.translation_manager.current_language == 'ar' else False,
+            controls=[
             ft.Text(
                 self.translation_manager.get_text("help_content"),
                 size=14
@@ -320,6 +339,7 @@ class BeneishController:
         dialog = ft.AlertDialog(
             title=ft.Text(self.translation_manager.get_text("faq_title")),
             content=ft.Container(
+                rtl=True if self.translation_manager.current_language == 'ar' else False,
                 content=faq_content,
                 width=600,
                 height=400
@@ -386,6 +406,7 @@ class BeneishController:
         dialog = ft.AlertDialog(
             title=ft.Text(self.translation_manager.get_text("about_title")),
             content=ft.Container(
+                rtl=True if self.translation_manager.current_language == 'ar' else False,
                 content=about_content,
                 width=400,
                 height=250

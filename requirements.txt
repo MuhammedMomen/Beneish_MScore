@@ -14,6 +14,7 @@ langchain-core>=0.1.0
 langchain-google-genai>=1.0.0
 langchain-openai>=0.1.0
 langchain-anthropic>=0.1.0
+anthropic
 
 # Optional: For enhanced PDF processing
 # pymupdf>=1.23.0
