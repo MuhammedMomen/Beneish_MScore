@@ -1,7 +1,7 @@
 # Beneish M-Score Financial Analysis Tool
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-Production%20Ready-brightgreen.svg)]()
 
 A sophisticated desktop application for detecting potential earnings manipulation in financial statements using the Beneish M-Score model. This tool combines AI-powered data extraction with proven financial analysis techniques to help auditors, analysts, and investors assess the likelihood of earnings manipulation.
@@ -321,7 +321,7 @@ python main.py
 - Manual testing procedures for UI components
 - Integration testing for AI provider connections
 - File processing validation across multiple formats
-- Cross-platform compatibility testing
+
 
 ## 📚 Educational Resources
 
@@ -374,7 +374,7 @@ We welcome contributions to improve the Beneish M-Score Financial Analysis Tool!
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -393,7 +393,7 @@ For support, questions, or feedback:
 ---
 
 **Version**: v1.0.0  
-**Last Updated**: January 2025  
+**Last Updated**: Sep-2025  
 **Status**: Production Ready
 
-*This tool is for educational and analytical purposes. Always consult with qualified financial professionals for investment decisions.*
+*Disclaimer: This tool is for educational and analytical purposes. AI may produce false information, it is good to double check calculations and always consult with qualified financial professionals for investment decisions.*
