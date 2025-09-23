@@ -40,7 +40,7 @@ class BeneishController:
         self.page.title = self.translation_manager.get_text("app_title")
         self.page.theme_mode = ft.ThemeMode.LIGHT
         self.page.window.width = 1400
-        self.page.window.height = 900
+        self.page.window_height = 900
         self.page.scroll = ft.ScrollMode.AUTO
         self.page.rtl = self.translation_manager.get_current_language() == "ar"
         
@@ -117,15 +117,14 @@ class BeneishController:
         else:
             # Use text buttons for larger screens
             actions = [
-                
-                ft.TextButton(
-                    text=self.translation_manager.get_text("language"),
-                    on_click=self.toggle_language,
-                    style=ft.ButtonStyle(color=ft.colors.WHITE)
-                ),
                 ft.TextButton(
                     text=self.translation_manager.get_text("model_founder"),
                     on_click=self.show_model_founder_dialog,
+                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                ),
+                ft.TextButton(
+                    text=self.translation_manager.get_text("language"),
+                    on_click=self.toggle_language,
                     style=ft.ButtonStyle(color=ft.colors.WHITE)
                 ),
                 ft.TextButton(
