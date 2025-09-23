@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 
 def main(page: ft.Page):
-    page.auto_scroll = True
+    page.scroll="always"
     page.window.full_screen = True
     # Load environment variables
     load_dotenv()

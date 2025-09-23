@@ -27,7 +27,9 @@ The **Beneish M-Score Calculator** is a user-friendly application designed to an
    ```bash
    pip install -r requirements.txt
    ```
-3. **Launch the Application**: Execute the main script:
+3. Add your llm api key in the .env file and remove the extension .example from the .env file 
+4. Open a cmd terminal and type the command cd + the project path on your machine to move the working directory
+5. **Launch the Application**: Execute the main script:
    ```bash
    python main.py
    ```
@@ -37,8 +39,8 @@ The **Beneish M-Score Calculator** is a user-friendly application designed to an
 ### Main Screen
 
 - **Upload Excel File**: Click the "Upload" button to select and upload your financial statements.
-- **Language Selection**: Choose between English and Arabic from the language dropdown.
-- **Settings**: Access application settings to configure preferences.
+- **Language Selection**: Choose between English and Arabic from the language button in the top bar.
+- **Settings**: Access application settings to configure llm provider, the default llm is google gemini pro 2.5 .
 
 ### Results Screen
 
