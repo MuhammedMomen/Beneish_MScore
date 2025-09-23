@@ -2,9 +2,11 @@
 import flet as ft
 from flet import Icons
 from typing import Callable
+import os
 from utils.config import Config
 from models.translation import TranslationManager
 from models.beneish_models import AnalysisResult, BeneishCalculator
+from services.export_service import ExportService
 
 class ResultsView:
     def __init__(
@@ -22,6 +24,7 @@ class ResultsView:
         self.result = result
         self.copy_callback = copy_callback
         self.rerun_callback = rerun_callback
+        self.export_service = ExportService(translation_manager)
         
     def build(self) -> ft.Control:
         """Build the results view"""
@@ -73,15 +76,37 @@ class ResultsView:
                     )
                 ], expand=True),
                 
-                ft.ElevatedButton(
-                    text=self.translation_manager.get_text("rerun_analysis"),
-                    icon=Icons.REFRESH,
-                    on_click=lambda _: self.rerun_callback(),
-                    style=ft.ButtonStyle(
-                        bgcolor=self.config.colors.secondary,
-                        color=ft.colors.WHITE
+                ft.Row([
+                    ft.PopupMenuButton(
+                        icon=Icons.DOWNLOAD,
+                        tooltip=self.translation_manager.get_text("export_report"),
+                        items=[
+                            ft.PopupMenuItem(
+                                text=self.translation_manager.get_text("export_pdf"),
+                                icon=Icons.PICTURE_AS_PDF,
+                                on_click=lambda _: self._export_to_pdf()
+                            ),
+                            ft.PopupMenuItem(
+                                text=self.translation_manager.get_text("export_excel"),
+                                icon=Icons.TABLE_CHART,
+                                on_click=lambda _: self._export_to_excel()
+                            )
+                        ],
+                        style=ft.ButtonStyle(
+                            bgcolor=self.config.colors.primary,
+                            color=ft.colors.WHITE
+                        )
+                    ),
+                    ft.ElevatedButton(
+                        text=self.translation_manager.get_text("rerun_analysis"),
+                        icon=Icons.REFRESH,
+                        on_click=lambda _: self.rerun_callback(),
+                        style=ft.ButtonStyle(
+                            bgcolor=self.config.colors.secondary,
+                            color=ft.colors.WHITE
+                        )
                     )
-                )
+                ], spacing=10)
             ]),
             margin=ft.margin.only(bottom=30)
         )
@@ -267,8 +292,8 @@ class ResultsView:
                 padding=15,
                 border_radius=10,
                 border=ft.border.all(1, ft.colors.GREY_300),
-                width=320,
-                height=190
+                width=350,
+                height=210
             )
             ratio_cards.append(card)
         
@@ -551,3 +576,155 @@ class ResultsView:
         
         self.page.open(dialog)
         self.page.update()
+    
+    def _export_to_pdf(self):
+        """Handle PDF export with file picker"""
+        def on_result(e: ft.FilePickerResultEvent):
+            if e.path:
+                # Ensure .pdf extension
+                file_path = e.path if e.path.endswith('.pdf') else f"{e.path}.pdf"
+                
+                # Show loading dialog
+                loading_dialog = ft.AlertDialog(
+                    title=ft.Text(self.translation_manager.get_text("exporting")),
+                    content=ft.Row([
+                        ft.ProgressRing(width=16, height=16, stroke_width=2),
+                        ft.Text(self.translation_manager.get_text("generating_pdf"))
+                    ], tight=True),
+                )
+                self.page.open(loading_dialog)
+                self.page.update()
+                
+                # Export to PDF
+                success = self.export_service.export_to_pdf(
+                    self.result,
+                    file_path,
+                    self.result.company_name
+                )
+                
+                # Close loading dialog
+                self.page.close(loading_dialog)
+                
+                # Show result dialog
+                if success:
+                    self._show_export_success_dialog(file_path, "PDF")
+                else:
+                    self._show_export_error_dialog()
+        
+        # Create file picker
+        file_picker = ft.FilePicker(on_result=on_result)
+        self.page.overlay.append(file_picker)
+        self.page.update()
+        
+        # Open save dialog
+        file_picker.save_file(
+            dialog_title=self.translation_manager.get_text("save_pdf_report"),
+            file_name=f"{self.result.company_name}_beneish_report.pdf",
+            file_type=ft.FilePickerFileType.CUSTOM,
+            allowed_extensions=["pdf"]
+        )
+    
+    def _export_to_excel(self):
+        """Handle Excel export with file picker"""
+        def on_result(e: ft.FilePickerResultEvent):
+            if e.path:
+                # Ensure .xlsx extension
+                file_path = e.path if e.path.endswith('.xlsx') else f"{e.path}.xlsx"
+                
+                # Show loading dialog
+                loading_dialog = ft.AlertDialog(
+                    title=ft.Text(self.translation_manager.get_text("exporting")),
+                    content=ft.Row([
+                        ft.ProgressRing(width=16, height=16, stroke_width=2),
+                        ft.Text(self.translation_manager.get_text("generating_excel"))
+                    ], tight=True),
+                )
+                self.page.open(loading_dialog)
+                self.page.update()
+                
+                # Export to Excel
+                success = self.export_service.export_to_excel(
+                    self.result,
+                    file_path,
+                    self.result.company_name
+                )
+                
+                # Close loading dialog
+                self.page.close(loading_dialog)
+                
+                # Show result dialog
+                if success:
+                    self._show_export_success_dialog(file_path, "Excel")
+                else:
+                    self._show_export_error_dialog()
+        
+        # Create file picker
+        file_picker = ft.FilePicker(on_result=on_result)
+        self.page.overlay.append(file_picker)
+        self.page.update()
+        
+        # Open save dialog
+        file_picker.save_file(
+            dialog_title=self.translation_manager.get_text("save_excel_report"),
+            file_name=f"{self.result.company_name}_beneish_report.xlsx",
+            file_type=ft.FilePickerFileType.CUSTOM,
+            allowed_extensions=["xlsx"]
+        )
+    
+    def _show_export_success_dialog(self, file_path: str, format_type: str):
+        """Show success dialog after export"""
+        dialog = ft.AlertDialog(
+            title=ft.Text(self.translation_manager.get_text("export_success")),
+            content=ft.Column([
+                ft.Icon(Icons.CHECK_CIRCLE, color=ft.colors.GREEN, size=40),
+                ft.Text(f"{format_type} {self.translation_manager.get_text('report_saved_to')}"),
+                ft.Text(file_path, selectable=True, size=12)
+            ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+            actions=[
+                ft.TextButton(
+                    self.translation_manager.get_text("open_folder"),
+                    on_click=lambda _: self._open_file_location(file_path)
+                ),
+                ft.TextButton(
+                    self.translation_manager.get_text("close_button"),
+                    on_click=lambda _: self.page.close(dialog)
+                )
+            ]
+        )
+        self.page.open(dialog)
+        self.page.update()
+    
+    def _show_export_error_dialog(self):
+        """Show error dialog if export fails"""
+        dialog = ft.AlertDialog(
+            title=ft.Text(self.translation_manager.get_text("export_error")),
+            content=ft.Column([
+                ft.Icon(Icons.ERROR, color=ft.colors.RED, size=40),
+                ft.Text(self.translation_manager.get_text("export_failed_message"))
+            ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+            actions=[
+                ft.TextButton(
+                    self.translation_manager.get_text("close_button"),
+                    on_click=lambda _: self.page.close(dialog)
+                )
+            ]
+        )
+        self.page.open(dialog)
+        self.page.update()
+    
+    def _open_file_location(self, file_path: str):
+        """Open file location in system file explorer"""
+        try:
+            import subprocess
+            import platform
+            
+            folder_path = os.path.dirname(file_path)
+            
+            if platform.system() == "Windows":
+                subprocess.run(["explorer", folder_path])
+            elif platform.system() == "Darwin":  # macOS
+                subprocess.run(["open", folder_path])
+            else:  # Linux
+                subprocess.run(["xdg-open", folder_path])
+        except Exception as e:
+            print(f"Error opening file location: {e}")

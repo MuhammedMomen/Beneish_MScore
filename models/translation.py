@@ -69,6 +69,21 @@ class TranslationManager:
                 "guide_high": "M-Score > -1.78: High risk of earnings manipulation",
                 "rerun_analysis": "Run New Analysis",
                 
+                # Export Features
+                "export_report": "Export Report",
+                "export_pdf": "Export to PDF",
+                "export_excel": "Export to Excel",
+                "save_pdf_report": "Save PDF Report",
+                "save_excel_report": "Save Excel Report",
+                "exporting": "Exporting...",
+                "generating_pdf": "Generating PDF report...",
+                "generating_excel": "Generating Excel report...",
+                "export_success": "Export Successful",
+                "export_error": "Export Failed",
+                "report_saved_to": "report saved to:",
+                "export_failed_message": "Failed to generate report. Please try again.",
+                "open_folder": "Open Folder",
+                
                 # Ratio Descriptions
                 "dsri_desc": "Measures the change in accounts receivable relative to sales",
                 "gmi_desc": "Compares gross margin between current and previous year", 
@@ -121,9 +136,9 @@ This tool is for educational and analysis purposes only.""",
                 
                 # About
                 "about_title": "About the Developer",
-                "about_content": "This application was developed as a professional financial analysis tool.",
+                "about_content": "This application was developed as a professional and educational financial analysis tool.",
                 "contact_email": "Contact Email",
-                "business_card": "Business Contact",
+                "business_card": "Developer Contact",
                 
                 # Hardcoded UI strings
                 "ai_extract_analyze": "AI will extract and analyze financial data",
@@ -141,9 +156,9 @@ This tool is for educational and analysis purposes only.""",
                 "model": "Model",
                 "status": "Status",
                 "not_set": "Not Set",
-                "developer_email": "developer@example.com",
-                "company_name": "Financial Analysis Solutions",
-                "website": "www.example.com",
+                "developer_email": "Momen.Acct@gmail.com",
+                "company_name": "Financial Solutions Developer & ERP Consultant",
+                "website": "https://www.linkedin.com/in/muhammedmomen/",
                 "api_key_required_input": "API Key required",
                 "enter_api_key": "Enter your {provider} API Key",
                 "ai_provider_config": "AI Provider Configuration",
@@ -243,6 +258,21 @@ This tool is for educational and analysis purposes only.""",
                 "guide_high": "النتيجة > -1.78: مخاطر عالية لتلاعب في الأرباح",
                 "rerun_analysis": "تشغيل تحليل جديد",
                 
+                # Export Features
+                "export_report": "تصدير التقرير",
+                "export_pdf": "تصدير إلى PDF",
+                "export_excel": "تصدير إلى Excel",
+                "save_pdf_report": "حفظ تقرير PDF",
+                "save_excel_report": "حفظ تقرير Excel",
+                "exporting": "جاري التصدير...",
+                "generating_pdf": "جاري إنشاء تقرير PDF...",
+                "generating_excel": "جاري إنشاء تقرير Excel...",
+                "export_success": "تم التصدير بنجاح",
+                "export_error": "فشل التصدير",
+                "report_saved_to": "تم حفظ التقرير في:",
+                "export_failed_message": "فشل في إنشاء التقرير. يرجى المحاولة مرة أخرى.",
+                "open_folder": "فتح المجلد",
+                
                 # Ratio Descriptions
                 "dsri_desc": "يقيس التغير في الذمم المدينة بالنسبة للمبيعات",
                 "gmi_desc": "يقارن الهامش الإجمالي بين السنة الحالية والسابقة",
@@ -262,12 +292,12 @@ This tool is for educational and analysis purposes only.""",
                 "incomplete_analysis": "التحليل غير مكتمل بسبب البيانات المفقودة",
                 
                 # Help Dialog  
-                "help_title": "ما هي نتيجة بينيش إم؟",
-                "help_content": """نتيجة بينيش إم هي نموذج رياضي يستخدم ثمانية نسب مالية لاكتشاف ما إذا كانت الشركة قد لاعبت في أرباحها.
+                "help_title": "ما هو نموذج بينيش إم؟",
+                "help_content": """نتيجة بينيش إم هي نموذج رياضي وإحصائي يستخدم ثمانية نسب مالية لاكتشاف ما إذا كانت الشركة قد تلاعبت في أرباحها.
 
 إنها أداة إنذار مبكر تساعد:
 • المستثمرين على تحديد الاحتيال المحاسبي المحتمل
-• المدققين على التركيز على الشركات عالية المخاطر
+• المراجعين على التركيز على الشركات عالية المخاطر
 • المحللين على تقييم جودة الأرباح  
 • الجهات التنظيمية على اكتشاف التقارير المالية المشبوهة
 
@@ -290,9 +320,9 @@ This tool is for educational and analysis purposes only.""",
                 
                 # About
                 "about_title": "حول المطور",
-                "about_content": "تم تطوير هذا التطبيق كأداة تحليل مالي مهنية.",
+                "about_content": "تم تطوير هذا التطبيق كأداة تحليل مالي مهنية وكذلك تعليمية.",
                 "contact_email": "البريد الإلكتروني للتواصل",
-                "business_card": "جهة الاتصال التجارية",
+                "business_card": "للتواصل مع المطور",
                 
                 # Hardcoded UI strings
                 "ai_extract_analyze": "سيقوم الذكاء الاصطناعي باستخراج وتحليل البيانات المالية",
@@ -309,9 +339,9 @@ This tool is for educational and analysis purposes only.""",
                 "model": "النموذج",
                 "status": "الحالة",
                 "not_set": "غير محدد",
-                "developer_email": "developer@example.com",
-                "company_name": "حلول التحليل المالي",
-                "website": "www.example.com",
+                "developer_email": "Momen.Acct@gmail.com",
+                "company_name": "مطور واستشاري حلول برمجية مالية",
+                "website": "https://www.linkedin.com/in/muhammedmomen/",
                 "api_key_required_input": "مفتاح API مطلوب",
                 "enter_api_key": "أدخل مفتاح API الخاص بـ {provider}",
                 "ai_provider_config": "تكوين مزود الذكاء الاصطناعي",
