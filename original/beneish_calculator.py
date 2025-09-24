@@ -163,8 +163,8 @@ class BeneishCalculator:
         """Calculate the 8 Beneish M-Score ratios"""
         
         # Days Sales in Receivables Index (DSRI)
-        dsr_1 = (year_1['accounts_receivables'] / year_1['revenue']) * 365 if year_1['revenue'] != 0 else 0
-        dsr_2 = (year_2['accounts_receivables'] / year_2['revenue']) * 365 if year_2['revenue'] != 0 else 0
+        dsr_1 = (year_1['accounts_receivables'] / year_1['revenue'])  if year_1['revenue'] != 0 else 0
+        dsr_2 = (year_2['accounts_receivables'] / year_2['revenue'])  if year_2['revenue'] != 0 else 0
         dsri = dsr_2 / dsr_1 if dsr_1 != 0 else 1
         
         # Gross Margin Index (GMI)

@@ -339,13 +339,13 @@ class ResultsView:
         
         if ratio_name == "DSRI":
             # Days Sales in Receivables Index
-            dsr_1 = safe_divide(year_1.get('accounts_receivables', 0), year_1.get('revenue', 1)) * 365
-            dsr_2 = safe_divide(year_2.get('accounts_receivables', 0), year_2.get('revenue', 1)) * 365
+            dsr_1 = safe_divide(year_1.get('accounts_receivables', 0), year_1.get('revenue', 1)) 
+            dsr_2 = safe_divide(year_2.get('accounts_receivables', 0), year_2.get('revenue', 1)) 
             
             return {
-                "formula": "DSRI = (AR₂/Sales₂ × 365) ÷ (AR₁/Sales₁ × 365)",
-                "calculation": f"DSRI = ({format_number(year_2.get('accounts_receivables', 0))}/{format_number(year_2.get('revenue', 1))} × 365) ÷ ({format_number(year_1.get('accounts_receivables', 0))}/{format_number(year_1.get('revenue', 1))} × 365)\n= {dsr_2:.1f} ÷ {dsr_1:.1f} = {safe_divide(dsr_2, dsr_1):.3f}",
-                "tooltip": self.translation_manager.get_text("dsri_tooltip_description") + f"\n\nDSRI = (AR₂/Sales₂ × 365) ÷ (AR₁/Sales₁ × 365)\n= {dsr_2:.1f} ÷ {dsr_1:.1f} = {safe_divide(dsr_2, dsr_1):.3f}"
+                "formula": "DSRI = (AR₂/Sales₂ ) ÷ (AR₁/Sales₁ )",
+                "calculation": f"DSRI = ({format_number(year_2.get('accounts_receivables', 0))}/{format_number(year_2.get('revenue', 1))} ) ÷ ({format_number(year_1.get('accounts_receivables', 0))}/{format_number(year_1.get('revenue', 1))} )\n= {dsr_2:.1f} ÷ {dsr_1:.1f} = {safe_divide(dsr_2, dsr_1):.3f}",
+                "tooltip": self.translation_manager.get_text("dsri_tooltip_description") + f"\n\nDSRI = (AR₂/Sales₂ ) ÷ (AR₁/Sales₁ )\n= {dsr_2:.1f} ÷ {dsr_1:.1f} = {safe_divide(dsr_2, dsr_1):.3f}"
             }
         
         elif ratio_name == "GMI":

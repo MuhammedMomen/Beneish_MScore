@@ -90,8 +90,8 @@ class BeneishCalculator:
             return numerator / denominator if denominator != 0 else default
         
         # Days Sales in Receivables Index (DSRI)
-        dsr_1 = safe_divide(year_1['accounts_receivables'], year_1['revenue']) * 365 if year_1['revenue'] != 0 else 0
-        dsr_2 = safe_divide(year_2['accounts_receivables'], year_2['revenue']) * 365 if year_2['revenue'] != 0 else 0
+        dsr_1 = safe_divide(year_1['accounts_receivables'], year_1['revenue'])  if year_1['revenue'] != 0 else 0
+        dsr_2 = safe_divide(year_2['accounts_receivables'], year_2['revenue'])  if year_2['revenue'] != 0 else 0
         dsri = safe_divide(dsr_2, dsr_1)
         
         # Gross Margin Index (GMI)
