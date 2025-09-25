@@ -1,7 +1,7 @@
 # models/beneish_models.py - Data models and business logic
 from dataclasses import dataclass
 from typing import Dict, Any, Optional, List
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 import pandas as pd
 from enum import Enum
 

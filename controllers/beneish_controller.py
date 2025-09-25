@@ -80,38 +80,38 @@ class BeneishController:
                     Icons.TRANSLATE,
                     tooltip=self.translation_manager.get_text("language"),
                     on_click=self.toggle_language,
-                    icon_color=ft.colors.WHITE
+                    icon_color=ft.Colors.WHITE
                 ),
                 ft.IconButton(
                     Icons.PERSON,
                     tooltip=self.translation_manager.get_text("model_founder"),
                     on_click=self.show_model_founder_dialog,
-                    icon_color=ft.colors.WHITE
+                    icon_color=ft.Colors.WHITE
                 ),
                 
                 ft.IconButton(
                     Icons.HELP,
                     tooltip=self.translation_manager.get_text("help"),
                     on_click=self.show_help_dialog,
-                    icon_color=ft.colors.WHITE
+                    icon_color=ft.Colors.WHITE
                 ),
                 ft.IconButton(
                     Icons.QUIZ,
                     tooltip=self.translation_manager.get_text("faq"),
                     on_click=self.show_faq_dialog,
-                    icon_color=ft.colors.WHITE
+                    icon_color=ft.Colors.WHITE
                 ),
                 ft.IconButton(
                     Icons.INFO,
                     tooltip=self.translation_manager.get_text("about"),
                     on_click=self.show_about_dialog,
-                    icon_color=ft.colors.WHITE
+                    icon_color=ft.Colors.WHITE
                 ),
                 ft.IconButton(
                     Icons.SETTINGS,
                     tooltip=self.translation_manager.get_text("settings"),
                     on_click=self.show_settings,
-                    icon_color=ft.colors.WHITE
+                    icon_color=ft.Colors.WHITE
                 )
             ]
         else:
@@ -120,32 +120,32 @@ class BeneishController:
                 ft.TextButton(
                     text=self.translation_manager.get_text("model_founder"),
                     on_click=self.show_model_founder_dialog,
-                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(color=ft.Colors.WHITE)
                 ),
                 ft.TextButton(
                     text=self.translation_manager.get_text("language"),
                     on_click=self.toggle_language,
-                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(color=ft.Colors.WHITE)
                 ),
                 ft.TextButton(
                     text=self.translation_manager.get_text("help"),
                     on_click=self.show_help_dialog,
-                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(color=ft.Colors.WHITE)
                 ),
                 ft.TextButton(
                     text=self.translation_manager.get_text("faq"),
                     on_click=self.show_faq_dialog,
-                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(color=ft.Colors.WHITE)
                 ),
                 ft.TextButton(
                     text=self.translation_manager.get_text("about"),
                     on_click=self.show_about_dialog,
-                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(color=ft.Colors.WHITE)
                 ),
                 ft.TextButton(
                     text=self.translation_manager.get_text("settings"),
                     on_click=self.show_settings,
-                    style=ft.ButtonStyle(color=ft.colors.WHITE)
+                    style=ft.ButtonStyle(color=ft.Colors.WHITE)
                 )
             ]
         
@@ -156,7 +156,7 @@ class BeneishController:
                 Icons.ARROW_BACK,
                 tooltip=self.translation_manager.get_text("back"),
                 on_click=self.go_to_main_view,
-                icon_color=ft.colors.WHITE
+                icon_color=ft.Colors.WHITE
             )
         
         self.page.appbar = ft.AppBar(
@@ -165,7 +165,7 @@ class BeneishController:
                 self.translation_manager.get_text("app_title"),
                 size=20,
                 weight=ft.FontWeight.BOLD,
-                color=ft.colors.WHITE
+                color=ft.Colors.WHITE
             ),
             center_title=False,
             bgcolor=self.config.colors.primary,
@@ -193,6 +193,8 @@ class BeneishController:
             success = self.llm_service.initialize_llm(provider_name, default_model)
             if success:
                 print(f"✅ Auto-configured {provider_config.display_name} with {default_model}")
+        else:
+            print("⚠️ No LLM providers configured. Please configure API keys in settings.")
     
     def show_main_view(self):
         """Show the main upload view"""
@@ -383,7 +385,7 @@ class BeneishController:
                                     size=14
                                 ),
                                 url=f"mailto:{self.translation_manager.get_text('developer_email')}",
-                                style=ft.ButtonStyle(color=ft.colors.BLUE)
+                                style=ft.ButtonStyle(color=ft.Colors.BLUE)
                             )
                         ]),
                         ft.Row([
@@ -394,7 +396,7 @@ class BeneishController:
                                     size=14
                                 ),
                                 url=self.translation_manager.get_text("website"),
-                                style=ft.ButtonStyle(color=ft.colors.BLUE)
+                                style=ft.ButtonStyle(color=ft.Colors.BLUE)
                             )
                         ])
                     ]),

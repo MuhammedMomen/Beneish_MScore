@@ -71,8 +71,8 @@ class MainView:
             on_click=lambda _: self.on_upload_callback(),
             disabled=not self.llm_service.is_configured(),
             style=ft.ButtonStyle(
-                bgcolor=self.config.colors.secondary if self.llm_service.is_configured() else ft.colors.GREY_400,
-                color=ft.colors.WHITE,
+                bgcolor=self.config.colors.secondary if self.llm_service.is_configured() else ft.Colors.GREY_400,
+                color=ft.Colors.WHITE,
                 padding=ft.padding.all(15),
                 text_style=ft.TextStyle(size=16, weight=ft.FontWeight.BOLD)
             ),
@@ -104,7 +104,7 @@ class MainView:
                         ft.Text(
                             self.translation_manager.get_text("upload_subtitle"),
                             size=16,
-                            color=ft.colors.GREY_600,
+                            color=ft.Colors.GREY_600,
                             text_align=ft.TextAlign.CENTER
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
@@ -124,14 +124,14 @@ class MainView:
                             self.status_text
                         ], alignment=ft.MainAxisAlignment.CENTER),
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=40,
                     border_radius=15,
-                    border=ft.border.all(1, ft.colors.GREY_300),
+                    border=ft.border.all(1, ft.Colors.GREY_300),
                     shadow=ft.BoxShadow(
                         spread_radius=1,
                         blur_radius=10,
-                        color=ft.colors.with_opacity(0.1, ft.colors.BLACK)
+                        color=ft.Colors.with_opacity(0.1, ft.Colors.BLACK)
                     )
                 ),
                 
@@ -169,7 +169,7 @@ class MainView:
                     weight=ft.FontWeight.BOLD if not is_configured else ft.FontWeight.NORMAL
                 )
             ], alignment=ft.MainAxisAlignment.CENTER),
-            bgcolor=ft.colors.with_opacity(0.1, status_color),
+            bgcolor=ft.Colors.with_opacity(0.1, status_color),
             padding=15,
             border_radius=10,
             border=ft.border.all(1, status_color),
@@ -197,9 +197,9 @@ class MainView:
             ]),
             margin=ft.margin.only(top=40),
             padding=30,
-            bgcolor=ft.colors.with_opacity(0.05, self.config.colors.primary),
+            bgcolor=ft.Colors.with_opacity(0.05, self.config.colors.primary),
             border_radius=10,
-            border=ft.border.all(1, ft.colors.with_opacity(0.2, self.config.colors.primary))
+            border=ft.border.all(1, ft.Colors.with_opacity(0.2, self.config.colors.primary))
         )
     
     def create_instruction_item(self, icon: str, text: str) -> ft.Control:
@@ -207,7 +207,7 @@ class MainView:
         return ft.Container(
             content=ft.Row([
                 ft.Text(icon, size=16),
-                ft.Text(text, size=14, color=ft.colors.GREY_700)
+                ft.Text(text, size=14, color=ft.Colors.GREY_700)
             ]),
             margin=ft.margin.only(bottom=8)
         )
@@ -233,7 +233,7 @@ class MainView:
         is_configured = self.llm_service.is_configured()
         self.upload_button.disabled = not is_configured
         self.upload_button.style.bgcolor = (
-            self.config.colors.secondary if is_configured else ft.colors.GREY_400
+            self.config.colors.secondary if is_configured else ft.Colors.GREY_400
         )
         
         # Clear status

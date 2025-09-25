@@ -94,7 +94,7 @@ class ResultsView:
                         ],
                         style=ft.ButtonStyle(
                             bgcolor=self.config.colors.primary,
-                            color=ft.colors.WHITE
+                            color=ft.Colors.WHITE
                         )
                     ),
                     ft.ElevatedButton(
@@ -103,7 +103,7 @@ class ResultsView:
                         on_click=lambda _: self.rerun_callback(),
                         style=ft.ButtonStyle(
                             bgcolor=self.config.colors.secondary,
-                            color=ft.colors.WHITE
+                            color=ft.Colors.WHITE
                         )
                     )
                 ], spacing=10)
@@ -128,11 +128,11 @@ class ResultsView:
                     ft.Text(
                         f"{self.translation_manager.get_text('missing_values')}: {len(self.result.missing_fields)}",
                         size=16,
-                        color=ft.colors.GREY_600,
+                        color=ft.Colors.GREY_600,
                         text_align=ft.TextAlign.CENTER
                     )
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.with_opacity(0.1, self.config.colors.warning),
+                bgcolor=ft.Colors.with_opacity(0.1, self.config.colors.warning),
                 padding=40,
                 border_radius=15,
                 border=ft.border.all(2, self.config.colors.warning)
@@ -173,11 +173,11 @@ class ResultsView:
                         ft.Text(
                             self.translate_interpretation(self.result.interpretation),
                             size=16,
-                            color=ft.colors.GREY_600,
+                            color=ft.Colors.GREY_600,
                             text_align=ft.TextAlign.CENTER
                         )
                     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                    bgcolor=ft.colors.WHITE,
+                    bgcolor=ft.Colors.WHITE,
                     padding=30,
                     border_radius=15,
                     border=ft.border.all(3, score_color)
@@ -189,10 +189,10 @@ class ResultsView:
                 self.build_interpretation_guide()
                 
             ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-            bgcolor=ft.colors.with_opacity(0.05, score_color),
+            bgcolor=ft.Colors.with_opacity(0.05, score_color),
             padding=30,
             border_radius=15,
-            border=ft.border.all(1, ft.colors.with_opacity(0.3, score_color))
+            border=ft.border.all(1, ft.Colors.with_opacity(0.3, score_color))
         )
     
     def build_interpretation_guide(self) -> ft.Control:
@@ -211,7 +211,7 @@ class ResultsView:
                     ft.Text(
                         self.translation_manager.get_text("guide_low"),
                         size=14,
-                        color=ft.colors.GREY_700
+                        color=ft.Colors.GREY_700
                     )
                 ]),
                 ft.Container(height=5),
@@ -220,14 +220,14 @@ class ResultsView:
                     ft.Text(
                         self.translation_manager.get_text("guide_high"),
                         size=14,
-                        color=ft.colors.GREY_700
+                        color=ft.Colors.GREY_700
                     )
                 ])
             ]),
-            bgcolor=ft.colors.WHITE,
+            bgcolor=ft.Colors.WHITE,
             padding=20,
             border_radius=10,
-            border=ft.border.all(1, ft.colors.GREY_300)
+            border=ft.border.all(1, ft.Colors.GREY_300)
         )
     
     def build_ratios_section(self) -> ft.Control:
@@ -272,7 +272,7 @@ class ResultsView:
                     ft.Text(
                         ratio_descriptions.get(name, ""),
                         size=12,
-                        color=ft.colors.GREY_600,
+                        color=ft.Colors.GREY_600,
                         text_align=ft.TextAlign.CENTER
                     ),
                     ft.Container(
@@ -288,10 +288,10 @@ class ResultsView:
                         margin=ft.margin.only(top=5)
                     )
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.colors.WHITE,
+                bgcolor=ft.Colors.WHITE,
                 padding=15,
                 border_radius=10,
-                border=ft.border.all(1, ft.colors.GREY_300),
+                border=ft.border.all(1, ft.Colors.GREY_300),
                 width=350,
                 height=210
             )
@@ -320,10 +320,10 @@ class ResultsView:
                 ft.Container(height=20),
                 *rows
             ]),
-            bgcolor=ft.colors.with_opacity(0.02, self.config.colors.primary),
+            bgcolor=ft.Colors.with_opacity(0.02, self.config.colors.primary),
             padding=20,
             border_radius=15,
-            border=ft.border.all(1, ft.colors.with_opacity(0.2, self.config.colors.primary))
+            border=ft.border.all(1, ft.Colors.with_opacity(0.2, self.config.colors.primary))
         )
     
     def _get_formula_details(self, ratio_name: str) -> dict:
@@ -445,7 +445,7 @@ class ResultsView:
             ),
             style=ft.ButtonStyle(
                 bgcolor=self.config.colors.accent,
-                color=ft.colors.WHITE
+                color=ft.Colors.WHITE
             )
         )
         
@@ -459,7 +459,7 @@ class ResultsView:
             subtitle=ft.Text(
                 self.translation_manager.get_text("expand_data_tooltip"),
                 size=14,
-                color=ft.colors.GREY_600
+                color=ft.Colors.GREY_600
             ),
             controls=[
                 ft.Container(
@@ -471,8 +471,8 @@ class ResultsView:
                     padding=20
                 )
             ],
-            bgcolor=ft.colors.WHITE,
-            collapsed_bgcolor=ft.colors.with_opacity(0.05, self.config.colors.primary)
+            bgcolor=ft.Colors.WHITE,
+            collapsed_bgcolor=ft.Colors.with_opacity(0.05, self.config.colors.primary)
         )
     
     def create_financial_data_table(self) -> ft.Control:
@@ -486,8 +486,8 @@ class ResultsView:
             year_2_val = self.result.financial_data.year_2_data.get(field, 0)
             
             # Highlight missing values
-            year_1_color = ft.colors.RED_300 if year_1_val == 0 else ft.colors.BLACK
-            year_2_color = ft.colors.RED_300 if year_2_val == 0 else ft.colors.BLACK
+            year_1_color = ft.Colors.RED_300 if year_1_val == 0 else ft.Colors.BLACK
+            year_2_color = ft.Colors.RED_300 if year_2_val == 0 else ft.Colors.BLACK
             
             rows.append(
                 ft.DataRow(
@@ -509,10 +509,10 @@ class ResultsView:
                 ft.DataColumn(ft.Text(self.translation_manager.get_text("year_2"), weight=ft.FontWeight.BOLD))
             ],
             rows=rows,
-            border=ft.border.all(1, ft.colors.GREY_300),
+            border=ft.border.all(1, ft.Colors.GREY_300),
             border_radius=10,
-            vertical_lines=ft.border.BorderSide(1, ft.colors.GREY_300),
-            horizontal_lines=ft.border.BorderSide(1, ft.colors.GREY_300)
+            vertical_lines=ft.border.BorderSide(1, ft.Colors.GREY_300),
+            horizontal_lines=ft.border.BorderSide(1, ft.Colors.GREY_300)
         )
     
     def translate_risk_level(self, risk_level: str) -> str:
@@ -547,7 +547,7 @@ class ResultsView:
                     ft.Text(
                         formula_details["formula"],
                         size=12,
-                        color=ft.colors.GREY_800,
+                        color=ft.Colors.GREY_800,
                         selectable=True
                     ),
                     ft.Container(height=10),
@@ -560,7 +560,7 @@ class ResultsView:
                     ft.Text(
                         formula_details["calculation"],
                         size=12,
-                        color=ft.colors.GREY_800,
+                        color=ft.Colors.GREY_800,
                         selectable=True
                     )
                 ], spacing=5, rtl=True if self.translation_manager.current_language == 'ar' else False),
@@ -677,7 +677,7 @@ class ResultsView:
         dialog = ft.AlertDialog(
             title=ft.Text(self.translation_manager.get_text("export_success")),
             content=ft.Column([
-                ft.Icon(Icons.CHECK_CIRCLE, color=ft.colors.GREEN, size=40),
+                ft.Icon(Icons.CHECK_CIRCLE, color=ft.Colors.GREEN, size=40),
                 ft.Text(f"{format_type} {self.translation_manager.get_text('report_saved_to')}"),
                 ft.Text(file_path, selectable=True, size=12)
             ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER, rtl=True if self.translation_manager.current_language == 'ar' else False),
@@ -700,7 +700,7 @@ class ResultsView:
         dialog = ft.AlertDialog(
             title=ft.Text(self.translation_manager.get_text("export_error")),
             content=ft.Column([
-                ft.Icon(Icons.ERROR, color=ft.colors.RED, size=40),
+                ft.Icon(Icons.ERROR, color=ft.Colors.RED, size=40),
                 ft.Text(self.translation_manager.get_text("export_error_message"))
             ], tight=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER, rtl=True if self.translation_manager.current_language == 'ar' else False),
             actions=[

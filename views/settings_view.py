@@ -199,7 +199,7 @@ class SettingsView:
                 self.provider_dropdown,
                 self.model_dropdown
             ]),
-            bgcolor=ft.colors.with_opacity(0.05, ft.colors.PRIMARY),
+            bgcolor=ft.Colors.with_opacity(0.05, ft.Colors.PRIMARY),
             padding=15,
             border_radius=10
         )
@@ -218,7 +218,7 @@ class SettingsView:
             text=self.translation_manager.get_text("test_save_configuration"),
             icon=Icons.PLAY_ARROW_ROUNDED,
             on_click=self.test_configuration,
-            style=ft.ButtonStyle(bgcolor=self.config.colors.secondary, color=ft.colors.WHITE),
+            style=ft.ButtonStyle(bgcolor=self.config.colors.secondary, color=ft.Colors.WHITE),
             width=300,
         )
         
@@ -255,7 +255,7 @@ class SettingsView:
                 ft.Divider(height=15, thickness=1),
                 self.status_text
             ]),
-            bgcolor=ft.colors.with_opacity(0.05, self.config.colors.accent),
+            bgcolor=ft.Colors.with_opacity(0.05, self.config.colors.accent),
             padding=15,
             border_radius=10,
         )

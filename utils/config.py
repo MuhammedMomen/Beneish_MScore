@@ -77,7 +77,9 @@ class Config:
     
     def is_provider_configured(self, provider: str) -> bool:
         """Check if provider has valid API key"""
-        return bool(self.get_api_key(provider))
+        api_key = self.get_api_key(provider)
+        # Check if API key exists and is not a placeholder
+        return bool(api_key) and api_key != "Your-API-Key-Here"
     
     def get_available_providers(self) -> Dict[str, LLMConfig]:
         """Get all available providers with their config"""
